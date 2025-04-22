@@ -24,6 +24,8 @@ public class Staff {
 
     private String staffRole;
 
+    private String employeeNumber;
+
     private String email;
 
     private String gender;
@@ -33,5 +35,7 @@ public class Staff {
     private String age;
 
     private String address;
+
+
 }
 
