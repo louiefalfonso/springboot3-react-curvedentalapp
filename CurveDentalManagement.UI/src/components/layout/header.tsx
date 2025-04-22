@@ -11,7 +11,7 @@ const Header = ({ Title }: HeaderProps) => {
             <SidebarTrigger />
             <h1 className="header-title">{Title}</h1>
           </div>
-          <Button className="mr-4 bg-orange-500 hover:bg-orange-600" aria-label="Logout">
+          <Button className="mr-4 bg-sky-800 hover:bg-sky-950" aria-label="Logout">
             <LogOut /> Logout
           </Button>
         </header>

@@ -1,6 +1,6 @@
 import Header from "@/components/layout/header"
 import MainLayout from "@/components/layout/layout"
-import StaffLists from "@/components/staff/staff-lists"
+import StaffLists from "@/components/staffs/staff-lists"
 
 const StaffListsPage = () => {
   return (
