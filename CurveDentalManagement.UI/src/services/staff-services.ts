@@ -6,6 +6,7 @@ interface Staff {
     firstName?: string;
     lastName?: string;
     staffRole?: string;
+    employeeNumber?: string;
     email?: string;
     gender?: string;
     phoneNumber?: string;
