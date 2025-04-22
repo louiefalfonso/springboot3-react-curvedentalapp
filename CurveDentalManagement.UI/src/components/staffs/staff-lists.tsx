@@ -38,7 +38,8 @@ const filteredStaffs: Staff[] = searchQuery
   ? data.filter((staff: Staff) =>
       staff.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       staff.lastName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      staff.staffRole.toLowerCase().includes(searchQuery.toLowerCase()) 
+      staff.staffRole.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      staff.employeeNumber.toLowerCase().includes(searchQuery.toLowerCase())
     )
   : data;
 
@@ -54,9 +55,9 @@ const handlePageChange = (newPage: number) => {
 
   return (
     <div className="rounded-md border p-5 w-full overflow-x-auto">
-      <div className="flex justify-between items-center pb-5">
+      <div className="flex flex-col md:flex-row justify-between items-center pb-5 space-y-2 md:space-y-0 md:space-x-2">
           <Link to={`/staffs/add`}>
-            <Button className ="bg-green-500 hover:bg-green-600">Add Staff</Button>
+            <Button className ="bg-green-500 hover:bg-green-600">Add New Staff</Button>
           </Link>
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
           <Input type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="p-2 border rounded"/>
@@ -69,9 +70,9 @@ const handlePageChange = (newPage: number) => {
                 <TableRow>
                     <TableHead>Full Name</TableHead>
                     <TableHead>Role / Position</TableHead>
+                    <TableHead>Employee Number</TableHead>
                     <TableHead>Email Address</TableHead>
                     <TableHead>Phone Number</TableHead>
-                    <TableHead>Address</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -79,12 +80,12 @@ const handlePageChange = (newPage: number) => {
               <TableRow key={staff.id}>
                 <TableCell>{staff.firstName} {staff.lastName}</TableCell>
                 <TableCell>{staff.staffRole}</TableCell>
+                <TableCell>{staff.employeeNumber}</TableCell> 
                 <TableCell>{staff.email}</TableCell> 
                 <TableCell>{staff.phoneNumber}</TableCell>
-                <TableCell>{staff.address}</TableCell>
                 <TableCell>
                     <Link to={`/staffs/update/${staff.id}`}>
-                        <Button className="bg-violet-500 hover:bg-violet-600">Update</Button>
+                        <Button className="bg-orange-600 hover:bg-orange-700">Update</Button>
                     </Link>
                 </TableCell>
               </TableRow>
