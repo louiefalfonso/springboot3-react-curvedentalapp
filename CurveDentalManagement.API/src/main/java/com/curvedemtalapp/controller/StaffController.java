@@ -52,6 +52,7 @@ public class StaffController {
         updateStaff.setFirstName(staffDetails.getFirstName());
         updateStaff.setLastName(staffDetails.getLastName());
         updateStaff.setStaffRole(staffDetails.getStaffRole());
+        updateStaff.setEmployeeNumber(staffDetails.getEmployeeNumber());
         updateStaff.setEmail(staffDetails.getEmail());
         updateStaff.setGender(staffDetails.getGender());
         updateStaff.setPhoneNumber(staffDetails.getPhoneNumber());
