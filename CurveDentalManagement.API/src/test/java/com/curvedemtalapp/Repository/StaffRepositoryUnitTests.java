@@ -5,19 +5,16 @@ import com.curvedemtalapp.repository.StaffRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class StaffRepositoryUnitTests {
 
     @Autowired
     private StaffRepository staffRepository;
 
     @Test
-    @Order(1)
     @DisplayName("Test 1: Create New Staff - Success")
     void createNewStaff() {
 
@@ -48,5 +45,43 @@ public class StaffRepositoryUnitTests {
         Assertions.assertThat(savedStaff.getPhoneNumber()).isEqualTo("02-9876-54321");
         Assertions.assertThat(savedStaff.getAge()).isEqualTo("28");
         Assertions.assertThat(savedStaff.getAddress()).isEqualTo("45 Maple Street, Hillington");
+    }
+
+    @Test
+    @DisplayName("Test 2: Get Staff By Id - Success")
+    void getStaffById() {
+
+        // Create a new staff object
+        Staff staff = Staff.builder()
+                .firstName("Claire")
+                .lastName("Jones")
+                .staffRole("Dental Hygienist")
+                .employeeNumber("CRV-3427686")
+                .email("emilyjohnson@curve-dental.co")
+                .gender("Female")
+                .phoneNumber("02-9876-54321")
+                .age("28")
+                .address("45 Maple Street, Hillington")
+                .build();
+
+        // Save the staff
+        Staff savedStaff = staffRepository.save(staff);
+
+        // Retrieve the staff by ID
+        Staff retrievedStaff = staffRepository.findById(savedStaff.getId()).orElse(null);
+
+        // Verify that the retrieved employee is not null
+        Assertions.assertThat(retrievedStaff).isNotNull();
+
+        // Verify that the retrieved staff's details match the saved employee's details
+        Assertions.assertThat(retrievedStaff.getFirstName()).isEqualTo("Claire");
+        Assertions.assertThat(retrievedStaff.getLastName()).isEqualTo("Jones");
+        Assertions.assertThat(retrievedStaff.getEmployeeNumber()).isEqualTo("CRV-3427686");
+        Assertions.assertThat(retrievedStaff.getStaffRole()).isEqualTo("Dental Hygienist");
+        Assertions.assertThat(retrievedStaff.getEmail()).isEqualTo("emilyjohnson@curve-dental.co");
+        Assertions.assertThat(retrievedStaff.getGender()).isEqualTo("Female");
+        Assertions.assertThat(retrievedStaff.getPhoneNumber()).isEqualTo("02-9876-54321");
+        Assertions.assertThat(retrievedStaff.getAge()).isEqualTo("28");
+        Assertions.assertThat(retrievedStaff.getAddress()).isEqualTo("45 Maple Street, Hillington");
     }
 }
