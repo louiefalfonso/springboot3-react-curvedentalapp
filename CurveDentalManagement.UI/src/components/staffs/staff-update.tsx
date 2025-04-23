@@ -15,7 +15,7 @@ const UpdateStaff = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // fetch department data
+  // fetch staff data
   const { data, isLoading } = useGetStaffById(id || "");
   const { mutate } = useUpdateStaff(id || "");
   const { mutate: deleteStaff } = useDeleteStaff();
@@ -30,7 +30,8 @@ const UpdateStaff = () => {
   const [age, setAge] = useState("");
   const [address, setAddress] = useState("");
 
-useEffect(()=>{
+  // set form values when data is fetched
+  useEffect(()=>{
     if (data) {
         setFirstName(data.firstName);
         setLastName(data.lastName);
