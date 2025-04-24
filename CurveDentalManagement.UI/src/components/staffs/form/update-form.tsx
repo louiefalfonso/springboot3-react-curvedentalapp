@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import DeleteStaffDialog from "../staff-delete"
 
-type StaffFormProps ={
+type StaffFormProps = {
     firstName: string;
     setFirstName: (value: string) => void;
     lastName: string;
@@ -74,7 +74,7 @@ const UpdateStaffForm: React.FC<StaffFormProps> = ({
         <Button type="submit" className=" bg-orange-600 hover:bg-orange-700" aria-label="Update Staff">
           Update Staff
         </Button>
-        <DeleteStaffDialog staffId={staffId} onDelete={handleDelete} aria-label="Delete Department"/>
+        <DeleteStaffDialog staffId={staffId} onDelete={handleDelete} aria-label="Delete Staff"/>
         <Link to={`/staffs`}>
           <Button className ="bg-gray-500 hover:bg-gray-600">
             Cancel

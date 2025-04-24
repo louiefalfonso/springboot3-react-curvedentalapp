@@ -52,10 +52,14 @@ public class PatientServiceImpl implements PatientService {
         patient.setLastName(updatePatient.getLastName());
         patient.setDateOfBirth(updatePatient.getDateOfBirth());
         patient.setGender(updatePatient.getGender());
+        patient.setAge(updatePatient.getAge());
         patient.setEmailAddress(updatePatient.getEmailAddress());
         patient.setPhoneNumber(updatePatient.getPhoneNumber());
         patient.setAddress(updatePatient.getAddress());
         patient.setInsuranceDetails(updatePatient.getInsuranceDetails());
+        patient.setInsuranceProvider(updatePatient.getInsuranceProvider());
+        patient.setInsurancePolicyNumber(updatePatient.getInsurancePolicyNumber());
+        patient.setInsuranceExpiryDate(updatePatient.getInsuranceExpiryDate());
 
         Patient updatePatientObj = patientRepository.save(patient);
         return modelMapper.map(updatePatientObj, PatientDto.class);

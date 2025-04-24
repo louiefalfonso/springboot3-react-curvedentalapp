@@ -30,6 +30,8 @@ public class Patient {
 
     private String gender;
 
+    private String age;
+
     private String emailAddress;
 
     private String phoneNumber;
@@ -37,6 +39,13 @@ public class Patient {
     private String address;
 
     private String insuranceDetails;
+
+    private String insuranceProvider;
+
+    private String insurancePolicyNumber;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
+    private Date insuranceExpiryDate;
 
 }
 
