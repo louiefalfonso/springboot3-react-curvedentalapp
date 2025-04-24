@@ -11,7 +11,7 @@ import UpdateStaffForm from "./form/update-form";
 
 const UpdateStaff = () => {
 
-  // get department ID from URL
+  // get staff ID from URL
   const { id } = useParams();
   const navigate = useNavigate();
 
