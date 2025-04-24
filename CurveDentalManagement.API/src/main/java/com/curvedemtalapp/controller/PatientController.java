@@ -53,6 +53,7 @@ public class PatientController {
         updatePatient.setLastName(patientDetails.getLastName());
         updatePatient.setDateOfBirth(patientDetails.getDateOfBirth());
         updatePatient.setGender(patientDetails.getGender());
+        updatePatient.setAge(patientDetails.getAge());
         updatePatient.setEmailAddress(patientDetails.getEmailAddress());
         updatePatient.setPhoneNumber(patientDetails.getPhoneNumber());
         updatePatient.setAddress(patientDetails.getAddress());
