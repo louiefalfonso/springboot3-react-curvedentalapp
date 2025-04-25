@@ -54,7 +54,6 @@ const AddNewPatientForm: React.FC<PatientProps> = ({onSubmit}) => {
     onSubmit(newPatient);
 }
 
-
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Patient Information</h2>
@@ -91,18 +90,19 @@ const AddNewPatientForm: React.FC<PatientProps> = ({onSubmit}) => {
       <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Insurance Details</h2>
       <div className="grid auto-rows-min md:grid-cols-2">
         <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="insuranceDetails">Insurance Details:</Label>
-          <Textarea id="insuranceDetails" placeholder="Insurance Details" onChange={(e) => setInsuranceDetails(e.target.value)}/>
+          <Label htmlFor="insurancePolicyNumber">Insurance Policy Number:</Label>
+          <Input type="text" id="insurancePolicyNumber" placeholder="Insurance Policy Number" onChange={(e) => setInsurancePolicyNumber(e.target.value)}/>
+          
           <Label htmlFor="insuranceProvider">insurance Provider:</Label>
           <Textarea id="insuranceProvider" placeholder="Insurance Provider" onChange={(e) => setInsuranceProvider(e.target.value)}/>
         </div>
         <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="insurancePolicyNumber">Insurance Policy Number:</Label>
-          <Input type="text" id="insurancePolicyNumber" placeholder="insurancePolicyNumber" onChange={(e) => setInsurancePolicyNumber(e.target.value)}/>
           <Label htmlFor="insuranceExpiryDate">Insurance Expiry Date :</Label>
           <Input type="date" id="paymentDate" value={insuranceExpiryDate ? format(insuranceExpiryDate, "yyyy-MM-dd") : ""}
               onChange={(e) => { const selectedDate = e.target.value ? new Date(e.target.value) : null; setInsuranceExpiryDate(selectedDate); }}
-          /> 
+          />
+          <Label htmlFor="insuranceDetails">Insurance Details:</Label>
+          <Textarea id="insuranceDetails" placeholder="Insurance Details" onChange={(e) => setInsuranceDetails(e.target.value)}/> 
         </div> 
       </div>
       <div className="flex pl-4 mt-4 ">

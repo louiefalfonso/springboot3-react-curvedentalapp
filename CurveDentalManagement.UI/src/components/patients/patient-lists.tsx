@@ -61,9 +61,9 @@ const handlePageChange = (newPage: number) => {
             <Button className ="bg-green-500 hover:bg-green-600">Add New Patient</Button>
           </Link>
           <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
-          <Input type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="p-2 border rounded"/>
-          <Button className="bg-gray-500 hover:bg-gray-600" onClick={() => { setSearchQuery(""); refetch(); }}> Clear Search</Button>
-        </div>
+            <Input type="text" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="p-2 border rounded"/>
+            <Button className="bg-gray-500 hover:bg-gray-600" onClick={() => { setSearchQuery(""); refetch(); }}> Clear Search</Button>
+          </div>
       </div>
       <div className="min-w-full">
         <Table>
@@ -91,8 +91,11 @@ const handlePageChange = (newPage: number) => {
                 <TableCell>{patient.emailAddress}</TableCell>
                 <TableCell>{patient.address}</TableCell>
                 <TableCell>
+                  <Link to={`/patients/details/${patient.id}`}>
+                    <Button className="mr-2 bg-violet-500 hover:bg-violet-600">View</Button>
+                  </Link>
                   <Link to={`/patients/update/${patient.id}`}>
-                    <Button className="bg-orange-500 hover:bg-orange-600">Update</Button>
+                    <Button className="mr-2 bg-orange-500 hover:bg-orange-600">Update</Button>
                   </Link>
                 </TableCell>
               </TableRow>
@@ -100,25 +103,24 @@ const handlePageChange = (newPage: number) => {
           </TableBody>
         </Table>
         <div className="flex justify-between items-center mt-4">
-        <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)}/>
-              </PaginationItem>
-              {[...Array(totalPages)].map((_, index) => (
-                <PaginationItem key={index}>
-                  <PaginationLink onClick={() => handlePageChange(index + 1)}>
-                    {index + 1}
-                  </PaginationLink>
+          <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)}/>
                 </PaginationItem>
-              ))}
-              <PaginationItem>
-                <PaginationNext onClick={() => handlePageChange(currentPage + 1)}/>
-              </PaginationItem>
-            </PaginationContent>
+                {[...Array(totalPages)].map((_, index) => (
+                  <PaginationItem key={index}>
+                    <PaginationLink onClick={() => handlePageChange(index + 1)}>
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext onClick={() => handlePageChange(currentPage + 1)}/>
+                </PaginationItem>
+              </PaginationContent>
           </Pagination>
         </div>
-
       </div>
     </div>
   )
