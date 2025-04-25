@@ -90,11 +90,13 @@ const UpdatePatient = () => {
             navigate("/patients");
           },
           onError: (error) => {
-            toast.error("Error updating patient");
+            console.error("Error Updating Patient:", error);
+            toast.error("Error Updating patient");
           },
         });
       } catch (error) {
-        toast.error("Error updating patient");
+        console.error("Unexpected error:", error);
+        toast.error("An unexpected error occurred. Please try again.");
       }
     }
 
