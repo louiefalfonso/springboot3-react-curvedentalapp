@@ -18,21 +18,21 @@ const DeletePatientDialog:React.FC<DeletePatientDialogProps> = ({patientId, onDe
 
   return (
     <Dialog>
-          <DialogTrigger asChild>
-          <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete</Button>
-          </DialogTrigger>
+      <DialogTrigger asChild>
+      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete</Button>
+      </DialogTrigger>
           <DialogContent>
             <DialogTitle>Confirm Deletion</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this patient information? This action cannot be undone.
+              Are you sure you want to fully delete this patient information? This action cannot be undone.
             </DialogDescription>
             <DialogFooter>
               <Button onClick={onDelete} className="bg-red-500 hover:bg-red-600">
                 Confirm
               </Button>
             </DialogFooter>
-          </DialogContent>
-        </Dialog>
+      </DialogContent>
+    </Dialog>
   )
 }
 

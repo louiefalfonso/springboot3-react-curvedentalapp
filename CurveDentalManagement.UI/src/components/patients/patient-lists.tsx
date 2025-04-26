@@ -20,29 +20,29 @@ const PatientLists = () => {
   if (!data) { return <div>No data found</div>;}
 
   // Define Patient interface
- interface Patient {
-    id: string; 
-    firstName: string;
-    lastName: string;
-    dateOfBirth: Date;
-    age: string
-    gender: string;
-    emailAddress: string;
-    phoneNumber: string;
-    address: string;
-    insuranceDetails: string;
-    insuranceProvider: string;
-    insurancePolicyNumber: string;
-    insuranceExpiryDate: string;
- }
+  interface Patient {
+      id: string; 
+      firstName: string;
+      lastName: string;
+      dateOfBirth: Date;
+      age: string
+      gender: string;
+      emailAddress: string;
+      phoneNumber: string;
+      address: string;
+      insuranceDetails: string;
+      insuranceProvider: string;
+      insurancePolicyNumber: string;
+      insuranceExpiryDate: string;
+  }
 
  // Filter staff based on search query
-const filteredPatients: Patient[] = searchQuery
-? data.filter((patient: Patient) =>
-    patient.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    patient.lastName.toLowerCase().includes(searchQuery.toLowerCase()) 
-  )
-: data;
+ const filteredPatients: Patient[] = searchQuery
+  ? data.filter((patient: Patient) =>
+      patient.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      patient.lastName.toLowerCase().includes(searchQuery.toLowerCase()) 
+    )
+  : data;
 
 // Pagination
 const totalPages = Math.ceil(filteredPatients.length / itemsPerPage);
@@ -69,8 +69,7 @@ const handlePageChange = (newPage: number) => {
         <Table>
           <TableHeader>
             <TableRow>
-                <TableHead>First Name</TableHead>
-                <TableHead>Last Name</TableHead>
+                <TableHead>Full Name</TableHead>
                 <TableHead>Date of Birth</TableHead>
                 <TableHead>Age</TableHead>
                 <TableHead>Gender</TableHead>
@@ -82,8 +81,7 @@ const handlePageChange = (newPage: number) => {
           <TableBody>
             {paginatedPatients.map((patient: Patient) => (
               <TableRow key={patient.id}>
-                <TableCell>{patient.firstName}</TableCell>
-                <TableCell>{patient.lastName}</TableCell>
+                <TableCell>{patient.firstName} {patient.lastName}</TableCell>
                 <TableCell>{format(new Date(patient.dateOfBirth), 'MM/dd/yyyy')}</TableCell>
                 <TableCell>{patient.age}</TableCell>
                 <TableCell>{patient.gender}</TableCell>
@@ -92,10 +90,10 @@ const handlePageChange = (newPage: number) => {
                 <TableCell>{patient.address}</TableCell>
                 <TableCell>
                   <Link to={`/patients/details/${patient.id}`}>
-                    <Button className="mr-2 bg-violet-500 hover:bg-violet-600">View</Button>
+                    <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
                   </Link>
                   <Link to={`/patients/update/${patient.id}`}>
-                    <Button className="mr-2 bg-orange-500 hover:bg-orange-600">Update</Button>
+                    <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>
                   </Link>
                 </TableCell>
               </TableRow>
