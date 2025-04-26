@@ -10,6 +10,7 @@ import PatientListsPage from './pages/patients/page';
 import AddNewPatient from './components/patients/patient-add';
 import UpdatePatient from './components/patients/patient-update';
 import PatientDetails from './components/patients/patient-details';
+import StaffDetails from './components/staffs/staff-details';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/staffs" element={<StaffListsPage/>} />
         <Route path="/staffs/add" element={<AddNewStaff/>} />
         <Route path="/staffs/update/:id" element={<UpdateStaff/>} />
+        <Route path="/staffs/details/:id" element={<StaffDetails/>} />
 
         <Route path="/patients" element={<PatientListsPage/>} /> 
         <Route path="/patients/add" element={<AddNewPatient/>} />

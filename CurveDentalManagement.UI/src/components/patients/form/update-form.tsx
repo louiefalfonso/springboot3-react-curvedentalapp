@@ -35,7 +35,7 @@ type PatientFormProps = {
     handleSubmit: (e: React.FormEvent) => void;
     handleDelete: () => void;
     patientId: string;
-  }
+}
 
 const UpdatePatientForm: React.FC<PatientFormProps> = ({
     firstName, setFirstName,
@@ -55,16 +55,18 @@ const UpdatePatientForm: React.FC<PatientFormProps> = ({
   return (
     <form onSubmit={handleSubmit}>
       <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Patient Information</h2>
-      <div className="grid auto-rows-min md:grid-cols-2">
+      <div className="grid auto-rows-min md:grid-cols-4">
         <div className="grid w-full items-center gap-4 p-4">
-            <Label htmlFor="firstName">First Name:</Label>
-            <Input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-            <Label htmlFor="emailAddress">Email Address:</Label>
-            <Input type="text" id="emailAddress" value={emailAddress} onChange={(e) => setEmailAddress(e.target.value)}/>
-            <Label htmlFor="phoneNumber">Phone Number:</Label>
-            <Input type="text" id="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
-            <Label htmlFor="dateOfBirth">Date Of Birth :</Label>
-            <Input type="date" id="dateOfBirth" value={dateOfBirth ? format(dateOfBirth, "yyyy-MM-dd") : ""}
+          <Label htmlFor="firstName">First Name:</Label>
+          <Input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
+          <Label htmlFor="phoneNumber">Phone Number:</Label>
+          <Input type="text" id="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
+        </div>
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="lastName">Last Name:</Label>
+          <Input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+          <Label htmlFor="dateOfBirth">Date Of Birth :</Label>
+          <Input type="date" id="dateOfBirth" value={dateOfBirth ? format(dateOfBirth, "yyyy-MM-dd") : ""}
                 onChange={(e) => { const selectedDate = e.target.value ? new Date(e.target.value) : undefined;
                   if (selectedDate && selectedDate > new Date()) {
                     alert("Date of birth cannot be in the future.");
@@ -72,20 +74,22 @@ const UpdatePatientForm: React.FC<PatientFormProps> = ({
                   }
                   setDateOfBirth(selectedDate);
                 }}
-              />
+          />
         </div>
         <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="lastName">Last Name:</Label>
-          <Input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
+          <Label htmlFor="emailAddress">Email Address:</Label>
+          <Input type="text" id="emailAddress" value={emailAddress} onChange={(e) => setEmailAddress(e.target.value)}/>
+          <Label htmlFor="gender">Gender:</Label>
+          <Input type="text" id="gender" value={gender} onChange={(e) => setGender(e.target.value)}/>
+        </div>
+        <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="age">Age:</Label>
           <Input type="text" id="age" value={age} onChange={(e) => setAge(e.target.value)}/>
-          <Label htmlFor="address">Address:</Label>
+          <Label htmlFor="address">Home Address:</Label>
           <Input type="text" id="address" value={address} onChange={(e) => setAddress(e.target.value)}/>
-          <Label htmlFor="gender">Gender:</Label>
-            <Input type="text" id="gender" value={gender} onChange={(e) => setGender(e.target.value)}/>
         </div>
       </div>
-
+      
       <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Insurance Details</h2>
       <div className="grid auto-rows-min md:grid-cols-2">
         <div className="grid w-full items-center gap-4 p-4">
@@ -103,6 +107,7 @@ const UpdatePatientForm: React.FC<PatientFormProps> = ({
           <Textarea id="insuranceDetails" value={insuranceDetails} onChange={(e) => setInsuranceDetails(e.target.value)}/>
         </div> 
       </div>
+
       <div className="flex pl-4 mt-4 ">
         <Button type="submit" className=" bg-orange-600 hover:bg-orange-700" aria-label="Update Staff">
           Update Patient

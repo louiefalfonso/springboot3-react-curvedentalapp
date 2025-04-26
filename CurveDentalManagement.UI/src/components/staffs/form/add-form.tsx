@@ -24,39 +24,27 @@ interface StaffProps {
 
 const AddNewStaffForm: React.FC<StaffProps> = ({onSubmit}) => {
 
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [staffRole, setStaffRole] = useState("");
-    const [employeeNumber, setEmployeeNumber] = useState("");
-    const [email, setEmail] = useState("")
-    const [gender, setGender] = useState("");
-    const [phoneNumber, setPhoneNumber] = useState("");
-    const [age, setAge] = useState("");
-    const [address, setAddress] = useState("");
+    // Group State Variables
+    const [staffData, setStaffData] = useState({
+        firstName:"",
+        lastName:"",
+        staffRole:"",
+        employeeNumber:"",
+        email:"",
+        gender:"",
+        phoneNumber:"",
+        age:"",
+        address:""
+    })
+
+     // Input handlers to use handleInputChange
+    const handleInputChange = (field: keyof typeof staffData, value: string ) => {
+        setStaffData((prev) => ({ ...prev, [field]: value }));
+    };
 
     const newStaff = useMemo<Staff>(
-        () => ({
-            id: "", 
-            firstName,
-            lastName,
-            staffRole,
-            employeeNumber,
-            email,
-            gender,
-            phoneNumber,
-            age,
-            address
-        }),[
-            firstName,
-            lastName,
-            staffRole,
-            employeeNumber,
-            email,
-            gender,
-            phoneNumber,
-            age,
-            address
-        ]);
+        ()=>({ id: "", ...staffData }), [staffData]
+    );
 
     const handleSubmit = (e: React.FormEvent) => {
             e.preventDefault();
@@ -68,27 +56,27 @@ const AddNewStaffForm: React.FC<StaffProps> = ({onSubmit}) => {
         <div className="grid auto-rows-min md:grid-cols-3">
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="firstName">First Name:</Label>
-                <Input type="text" id="firstName" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)}/>
+                <Input type="text" id="firstName" placeholder="First Name" onChange={(e) => handleInputChange("firstName", e.target.value)}/>
                 <Label htmlFor="lastName">Last Name:</Label>
-                <Input type="text" id="lastName" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)}/>
+                <Input type="text" id="lastName" placeholder="Last Name" onChange={(e) => handleInputChange("lastName", e.target.value)}/>
                 <Label htmlFor="staffRole">Role:</Label>
-                <Input type="text" id="staffRole" placeholder="Staff Role" onChange={(e) => setStaffRole(e.target.value)}/>
+                <Input type="text" id="staffRole" placeholder="Staff Role" onChange={(e) => handleInputChange("staffRole", e.target.value)}/>
             </div>
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="employeeNumber">Employee Number:</Label>
-                <Input type="text" id="employeeNumber" placeholder="Employee Number" onChange={(e) => setEmployeeNumber(e.target.value)}/>
+                <Input type="text" id="employeeNumber" placeholder="Employee Number" onChange={(e) => handleInputChange("employeeNumber", e.target.value)}/>
                 <Label htmlFor="email">Email:</Label>
-                <Input type="email" id="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
+                <Input type="email" id="email" placeholder="Email" onChange={(e) => handleInputChange("email", e.target.value)}/>
                 <Label htmlFor="gender">Gender:</Label>
-                <Input type="text" id="gender" placeholder="Gender" onChange={(e) => setGender(e.target.value)}/>
+                <Input type="text" id="gender" placeholder="Gender" onChange={(e) => handleInputChange("gender", e.target.value)}/>
             </div>
             <div className="grid w-full items-center gap-4 p-4">
                 <Label htmlFor="phoneNumber">Phone Number:</Label>
-                <Input type="text" id="phoneNumber" placeholder="Phone Number" onChange={(e) => setPhoneNumber(e.target.value)}/>
+                <Input type="text" id="phoneNumber" placeholder="Phone Number" onChange={(e) => handleInputChange("firstName", e.target.value)}/>
                 <Label htmlFor="age">Age:</Label>
-                <Input type="text" id="age" placeholder="Age" onChange={(e) => setAge(e.target.value)}/>
+                <Input type="text" id="age" placeholder="Age" onChange={(e) => handleInputChange("age", e.target.value)}/>
                 <Label htmlFor="address">Address:</Label>
-                <Textarea id="address" placeholder="Address" onChange={(e) => setAddress(e.target.value)}/>
+                <Textarea id="address" placeholder="Address" onChange={(e) => handleInputChange("address", e.target.value)}/>
             </div>
         </div>
         <div className="flex pl-4 mt-4 ">
