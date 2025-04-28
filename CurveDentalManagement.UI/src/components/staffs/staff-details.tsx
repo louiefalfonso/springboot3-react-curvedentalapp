@@ -1,9 +1,7 @@
 import { useParams, Link } from "react-router-dom";
-
 import Header from '../layout/header'
 import MainLayout from '../layout/layout'
 import { Button } from "@/components/ui/button";
-
 import { useGetStaffById } from "@/services/staff-services";
 import StaffDetailsList from "./list/list-staff";
 
@@ -27,7 +25,7 @@ if (!staffData) {
 
   return (
     <MainLayout>
-        <Header Title="Patient Details" />
+        <Header Title="Staff Details" />
         <div className="flex flex-1 flex-col gap-4 p-4">
           <StaffDetailsList staffData={staffData}/>
           <div className="flex">

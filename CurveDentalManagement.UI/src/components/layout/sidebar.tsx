@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, ContactRound, UserPen } from "lucide-react";
+import { Home, ContactRound, UserPen, BriefcaseMedical } from "lucide-react";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import MainLogo from '@/assets/curve-dental-logo.jpeg';
 
@@ -22,6 +22,11 @@ const items = [
       title: "Patients",
       url: "/patients",
       icon: UserPen,
+    },
+    {
+      title: "Doctors",
+      url: "/doctors",
+      icon: BriefcaseMedical,
     },
     
   ];
