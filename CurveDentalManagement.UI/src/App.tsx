@@ -15,6 +15,10 @@ import DoctorListsPage from './pages/doctors/page';
 import AddNewDoctor from './components/doctors/doctor-add';
 import UpdateDoctor from './components/doctors/doctor-update';
 import DoctorDetails from './components/doctors/doctor-details';
+import TreatmentListsPage from './pages/treatments/page';
+import AddNewTreatment from './components/treatments/treatment-add';
+import UpdateTreatment from './components/treatments/treatment-update';
+import TreatmentDetails from './components/treatments/treatment-details';
 
 function App() {
   return (
@@ -34,7 +38,12 @@ function App() {
         <Route path="/doctors" element={<DoctorListsPage/>} />
         <Route path="/doctors/add" element={<AddNewDoctor/>} />  
         <Route path="/doctors/update/:id" element={<UpdateDoctor/>} /> 
-        <Route path="/doctors/details/:id" element={<DoctorDetails/>} /> 
+        <Route path="/doctors/details/:id" element={<DoctorDetails/>} />
+
+        <Route path="/treatments" element={<TreatmentListsPage/>} />
+        <Route path="/treatments/add" element={<AddNewTreatment/>} /> 
+        <Route path="/treatments/update/:id" element={<UpdateTreatment/>} /> 
+        <Route path="/treatments/details/:id" element={<TreatmentDetails/>} />  
         
       </Routes>
       <Toaster />

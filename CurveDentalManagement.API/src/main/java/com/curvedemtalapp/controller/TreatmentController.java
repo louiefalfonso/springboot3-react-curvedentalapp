@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @CrossOrigin("*")
 @RestController
@@ -32,5 +34,40 @@ public class TreatmentController {
         Treatment treatment = treatmentRepository.findAllById(id)
                 .orElseThrow(()-> new RuntimeException("Treatment does not exist with Id:" + id));
         return ResponseEntity.ok(treatment);
+    }
+
+    //GET - Get All Treatments REST API
+    @GetMapping
+    public  ResponseEntity<List<TreatmentDto>> getAllTreatments(){
+        List<TreatmentDto> treatments = treatmentService.getAllTreatments();
+        return ResponseEntity.ok(treatments);
+    }
+
+    //UPDATE - Update Treatment REST API
+    @PutMapping("{id}")
+    public ResponseEntity<Treatment> updateTreatment(@PathVariable  ("id") long id,
+                                                     @RequestBody Treatment treatmentDetails){
+        Treatment updateTreatment = treatmentRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Treatment does not exist with id: " + id));
+
+        updateTreatment.setTreatmentName(treatmentDetails.getTreatmentName());
+        updateTreatment.setDescription(treatmentDetails.getDescription());
+        updateTreatment.setDuration(treatmentDetails.getDuration());
+        updateTreatment.setCost(treatmentDetails.getCost());
+        updateTreatment.setInsuranceCoverage(treatmentDetails.getInsuranceCoverage());
+        updateTreatment.setFollowUpCare(treatmentDetails.getFollowUpCare());
+        updateTreatment.setRiskBenefits(treatmentDetails.getRiskBenefits());
+        updateTreatment.setIndications(treatmentDetails.getIndications());
+        updateTreatment.setDoctor(treatmentDetails.getDoctor());
+
+        treatmentRepository.save(updateTreatment);
+        return ResponseEntity.ok(updateTreatment);
+    }
+
+    //DELETE - Delete Treatment REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteTreatment(@PathVariable ("id") Long treatmentId){
+        treatmentService.deleteTreatment(treatmentId);
+        return ResponseEntity.ok("Treatment Deleted Successfully");
     }
 }
