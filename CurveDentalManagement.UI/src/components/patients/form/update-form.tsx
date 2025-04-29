@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "sonner";
 import { format } from "date-fns";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
@@ -37,66 +38,57 @@ type PatientFormProps = {
     patientId: string;
 }
 
-const UpdatePatientForm: React.FC<PatientFormProps> = ({
-    firstName, setFirstName,
-    lastName, setLastName,
-    dateOfBirth, setDateOfBirth,
-    age, setAge,
-    gender, setGender,
-    emailAddress, setEmailAddress,
-    phoneNumber, setPhoneNumber,
-    address, setAddress,
-    insuranceDetails, setInsuranceDetails,
-    insuranceProvider, setInsuranceProvider,
-    insurancePolicyNumber, setInsurancePolicyNumber,
-    insuranceExpiryDate, setInsuranceExpiryDate,
-    handleSubmit, handleDelete, patientId
+const UpdatePatientForm: React.FC<PatientFormProps> = React.memo(({
+  firstName, setFirstName,
+  lastName, setLastName,
+  dateOfBirth, setDateOfBirth,
+  age, setAge,
+  gender, setGender,
+  emailAddress, setEmailAddress,
+  phoneNumber, setPhoneNumber,
+  address, setAddress,
+  insuranceDetails, setInsuranceDetails,
+  insuranceProvider, setInsuranceProvider,
+  insurancePolicyNumber, setInsurancePolicyNumber,
+  insuranceExpiryDate, setInsuranceExpiryDate,
+  handleSubmit, handleDelete, patientId
 }) => {
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Patient Information</h2>
-      <div className="grid auto-rows-min md:grid-cols-4">
-        <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="firstName">First Name:</Label>
-          <Input type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)}/>
-          <Label htmlFor="phoneNumber">Phone Number:</Label>
-          <Input type="text" id="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)}/>
+const formFields = [
+  { label: "First Name", id: "firstName", value: firstName, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value) },
+  { label: "Phone Number", id: "phoneNumber", value: phoneNumber, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setPhoneNumber(e.target.value) },
+  { label: "Last Name", id: "lastName", value: lastName, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value) },
+  { label: "Date Of Birth", id: "dateOfBirth", value: dateOfBirth ? format(dateOfBirth, "yyyy-MM-dd") : "", 
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => { const selectedDate = e.target.value ? new Date(e.target.value) : undefined; 
+      if (selectedDate && selectedDate > new Date()) 
+        { toast.error("Date of birth cannot be in the future.");
+          return; } 
+      setDateOfBirth(selectedDate); } 
+  },
+  { label: "Email Address", id: "emailAddress", value: emailAddress, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmailAddress(e.target.value) },
+  { label: "Gender", id: "gender", value: gender, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setGender(e.target.value) },
+  { label: "Age", id: "age", value: age, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAge(e.target.value) },
+  { label: "Home Address", id: "address", value: address, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value) },
+];
+
+return (
+  <form onSubmit={handleSubmit}>
+    <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Patient Information</h2>
+    <div className="grid auto-rows-min md:grid-cols-4">
+      {formFields.map(({ label, id, value, onChange }) => (
+        <div key={id} className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor={id}>{label}:</Label>
+          <Input type="text" id={id} value={value} onChange={onChange} />
         </div>
-        <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="lastName">Last Name:</Label>
-          <Input type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)}/>
-          <Label htmlFor="dateOfBirth">Date Of Birth :</Label>
-          <Input type="date" id="dateOfBirth" value={dateOfBirth ? format(dateOfBirth, "yyyy-MM-dd") : ""}
-                onChange={(e) => { const selectedDate = e.target.value ? new Date(e.target.value) : undefined;
-                  if (selectedDate && selectedDate > new Date()) {
-                    alert("Date of birth cannot be in the future.");
-                    return;
-                  }
-                  setDateOfBirth(selectedDate);
-                }}
-          />
-        </div>
-        <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="emailAddress">Email Address:</Label>
-          <Input type="text" id="emailAddress" value={emailAddress} onChange={(e) => setEmailAddress(e.target.value)}/>
-          <Label htmlFor="gender">Gender:</Label>
-          <Input type="text" id="gender" value={gender} onChange={(e) => setGender(e.target.value)}/>
-        </div>
-        <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="age">Age:</Label>
-          <Input type="text" id="age" value={age} onChange={(e) => setAge(e.target.value)}/>
-          <Label htmlFor="address">Home Address:</Label>
-          <Input type="text" id="address" value={address} onChange={(e) => setAddress(e.target.value)}/>
-        </div>
-      </div>
-      
-      <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Insurance Details</h2>
+      ))}
+    </div>
+    
+    <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Insurance Details</h2>
       <div className="grid auto-rows-min md:grid-cols-2">
         <div className="grid w-full items-center gap-4 p-4">
-            <Label htmlFor="insurancePolicyNumber">Insurance Policy Number:</Label>
-            <Input type="text" id="insurancePolicyNumber" value={insurancePolicyNumber} onChange={(e) => setInsurancePolicyNumber(e.target.value)}/>  
-            <Label htmlFor="insuranceProvider">insurance Provider:</Label>
-            <Textarea id="insuranceProvider" value={insuranceProvider} onChange={(e) => setInsuranceProvider(e.target.value)}/>
+          <Label htmlFor="insurancePolicyNumber">Insurance Policy Number:</Label>
+          <Input type="text" id="insurancePolicyNumber" value={insurancePolicyNumber} onChange={(e) => setInsurancePolicyNumber(e.target.value)}/>  
+          <Label htmlFor="insuranceProvider">Insurance Provider:</Label>
+          <Textarea id="insuranceProvider" value={insuranceProvider} onChange={(e) => setInsuranceProvider(e.target.value)}/>
         </div>
         <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="insuranceExpiryDate">Insurance Expiry Date :</Label>
@@ -106,21 +98,21 @@ const UpdatePatientForm: React.FC<PatientFormProps> = ({
           <Label htmlFor="insuranceDetails">Insurance Details:</Label>
           <Textarea id="insuranceDetails" value={insuranceDetails} onChange={(e) => setInsuranceDetails(e.target.value)}/>
         </div> 
-      </div>
+    </div>
 
-      <div className="flex pl-4 mt-4 ">
-        <Button type="submit" className=" bg-orange-600 hover:bg-orange-700" aria-label="Update Staff">
-          Update Patient
+    <div className="flex pl-4 mt-4 ">
+      <Button type="submit" className=" bg-orange-600 hover:bg-orange-700" aria-label="Update Patient">
+        Update Patient
+      </Button>
+      <DeletePatientDialog patientId={patientId} onDelete={handleDelete} aria-label="Delete Patient"/>
+      <Link to={`/patients`}>
+        <Button className ="bg-gray-500 hover:bg-gray-600">
+          Cancel
         </Button>
-        <DeletePatientDialog patientId={patientId} onDelete={handleDelete} aria-label="Delete Patient"/>
-        <Link to={`/patients`}>
-          <Button className ="bg-gray-500 hover:bg-gray-600">
-            Cancel
-          </Button>
-        </Link>
-      </div>
-    </form>
-  )
-}
+      </Link>
+    </div>
+  </form>
+)
+});
 
-export default UpdatePatientForm
+export default UpdatePatientForm;
