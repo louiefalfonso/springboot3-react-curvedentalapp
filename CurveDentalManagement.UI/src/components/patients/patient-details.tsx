@@ -20,7 +20,7 @@ const PatientDetails = () => {
     }
     
     if (!patientData) {
-       return <div>No employee data found</div>;
+       return <div>No patient data found</div>;
     }
     
   return (

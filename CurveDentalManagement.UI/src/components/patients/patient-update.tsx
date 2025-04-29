@@ -11,14 +11,14 @@ import { useGetPatientById, useUpdatePatient, useDeletePatient } from "@/service
 import UpdatePatientForm from "./form/update-form";
 
 const UpdatePatient = () => {
-  // get staff ID from URL
+  // get patient Id from URL
   const { id } = useParams();
   const navigate = useNavigate();
 
-   // fetch staff data
+   // fetch patient data
   const { data, isLoading } = useGetPatientById(id || "");
   const { mutate } = useUpdatePatient(id || "");
-  const { mutate: deleteStaff } = useDeletePatient();
+  const { mutate: deletePatient } = useDeletePatient();
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -103,7 +103,7 @@ const UpdatePatient = () => {
   // delete patient
   const handleDelete = () =>{
     try {
-      deleteStaff(id || "", {
+      deletePatient(id || "", {
         onSuccess: () => {
           toast.success("Patient Deleted successfully");
           navigate("/patients");
