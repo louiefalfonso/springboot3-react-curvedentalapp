@@ -7,8 +7,6 @@ interface DeleteDoctorDialogProps {
   onDelete: () => void;
 }
 
-
-
 const DeleteDoctorDialog: React.FC<DeleteDoctorDialogProps> = ({doctorId, onDelete}) => {
 
     // Validate the patient prop
