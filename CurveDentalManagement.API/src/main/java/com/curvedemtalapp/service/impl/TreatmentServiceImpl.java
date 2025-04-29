@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class TreatmentServiceImpl implements TreatmentService {
@@ -30,4 +33,41 @@ public class TreatmentServiceImpl implements TreatmentService {
                 .orElseThrow(()-> new RuntimeException("Treatment doesn't exist with a given Id:" + treatmentId));
         return modelMapper.map(treatment, TreatmentDto.class);
     }
+
+    // REST API - Get All Treatments
+    @Override
+    public List<TreatmentDto> getAllTreatments() {
+        List<Treatment> treatments = treatmentRepository.findAll();
+        return treatments.stream().map((treatment-> modelMapper.map(treatment, TreatmentDto.class)))
+                .collect(Collectors.toList());
+    }
+
+    // REST API - Update Treatment
+    @Override
+    public TreatmentDto updateTreatment(Long treatmentId, TreatmentDto updateTreatment) {
+        Treatment treatment = treatmentRepository.findAllById(treatmentId)
+                .orElseThrow(()-> new RuntimeException("Treatment doesn't exist with a given Id:" + treatmentId));
+
+        treatment.setTreatmentName(updateTreatment.getTreatmentName());
+        treatment.setDescription(updateTreatment.getDescription());
+        treatment.setDuration(updateTreatment.getDuration());
+        treatment.setCost(updateTreatment.getCost());
+        treatment.setInsuranceCoverage(updateTreatment.getInsuranceCoverage());
+        treatment.setFollowUpCare(updateTreatment.getFollowUpCare());
+        treatment.setRiskBenefits(updateTreatment.getRiskBenefits());
+        treatment.setIndications(updateTreatment.getIndications());
+        treatment.setDoctor(updateTreatment.getDoctor());
+
+        Treatment updateTreatmentObj = treatmentRepository.save(treatment);
+        return modelMapper.map(updateTreatmentObj, TreatmentDto.class);
+    }
+
+    // REST API - Delete Treatment
+    @Override
+    public void deleteTreatment(Long treatmentId) {
+        Treatment treatment = treatmentRepository.findAllById(treatmentId)
+                .orElseThrow(()->new RuntimeException("Treatment doesn't exist with given id:" + treatmentId));
+        treatmentRepository.deleteById(treatmentId);
+    }
 }
+
