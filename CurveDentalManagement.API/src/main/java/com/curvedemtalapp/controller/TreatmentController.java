@@ -1,6 +1,7 @@
 package com.curvedemtalapp.controller;
 
 import com.curvedemtalapp.dto.TreatmentDto;
+import com.curvedemtalapp.entity.Treatment;
 import com.curvedemtalapp.repository.TreatmentRepository;
 import com.curvedemtalapp.service.TreatmentService;
 import lombok.AllArgsConstructor;
@@ -23,5 +24,13 @@ public class TreatmentController {
     public ResponseEntity<TreatmentDto> createNewTreatment(@RequestBody TreatmentDto treatmentDto){
         TreatmentDto savedTreatment = treatmentService.createNewTreatment(treatmentDto);
         return new ResponseEntity<>(savedTreatment, HttpStatus.CREATED);
+    }
+
+    //GET - Get Treatment By ID REST API
+    @GetMapping("{id}")
+    public ResponseEntity<Treatment> getTreatmentById(@PathVariable ("id") Long id){
+        Treatment treatment = treatmentRepository.findAllById(id)
+                .orElseThrow(()-> new RuntimeException("Treatment does not exist with Id:" + id));
+        return ResponseEntity.ok(treatment);
     }
 }

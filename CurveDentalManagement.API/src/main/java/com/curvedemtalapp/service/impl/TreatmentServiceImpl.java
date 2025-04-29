@@ -22,4 +22,12 @@ public class TreatmentServiceImpl implements TreatmentService {
         Treatment savedTreatment = treatmentRepository.save(treatment);
         return modelMapper.map(savedTreatment, TreatmentDto.class);
     }
+
+    // REST API - Get Treatment By ID
+    @Override
+    public TreatmentDto getTreatmentById(Long treatmentId) {
+        Treatment treatment = treatmentRepository.findAllById(treatmentId)
+                .orElseThrow(()-> new RuntimeException("Treatment doesn't exist with a given Id:" + treatmentId));
+        return modelMapper.map(treatment, TreatmentDto.class);
+    }
 }
