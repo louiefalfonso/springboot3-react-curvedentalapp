@@ -57,7 +57,7 @@ public class TreatmentServiceImpl implements TreatmentService {
         treatment.setFollowUpCare(updateTreatment.getFollowUpCare());
         treatment.setRiskBenefits(updateTreatment.getRiskBenefits());
         treatment.setIndications(updateTreatment.getIndications());
-        treatment.setDoctor(updateTreatment.getDoctor());
+
 
         Treatment updateTreatmentObj = treatmentRepository.save(treatment);
         return modelMapper.map(updateTreatmentObj, TreatmentDto.class);

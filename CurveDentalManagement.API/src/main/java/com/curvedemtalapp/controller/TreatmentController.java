@@ -59,7 +59,6 @@ public class TreatmentController {
         updateTreatment.setFollowUpCare(treatmentDetails.getFollowUpCare());
         updateTreatment.setRiskBenefits(treatmentDetails.getRiskBenefits());
         updateTreatment.setIndications(treatmentDetails.getIndications());
-        updateTreatment.setDoctor(treatmentDetails.getDoctor());
 
         treatmentRepository.save(updateTreatment);
         return ResponseEntity.ok(updateTreatment);

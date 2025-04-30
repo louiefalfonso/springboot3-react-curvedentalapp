@@ -60,6 +60,7 @@ public class DoctorServiceImpl implements DoctorService {
         doctor.setDentalSchool(updateDoctor.getDentalSchool());
         doctor.setOfficeAddress(updateDoctor.getOfficeAddress());
         doctor.setEmergencyContact(updateDoctor.getEmergencyContact());
+        doctor.setTreatment(updateDoctor.getTreatment());
 
         Doctor updateDoctorObj = doctorRepository.save(doctor);
         return modelMapper.map(updateDoctorObj, DoctorDto.class);

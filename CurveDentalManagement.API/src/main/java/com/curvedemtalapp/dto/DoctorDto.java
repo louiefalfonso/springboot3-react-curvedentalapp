@@ -1,5 +1,6 @@
 package com.curvedemtalapp.dto;
 
+import com.curvedemtalapp.entity.Treatment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,4 +37,6 @@ public class DoctorDto {
     private String officeAddress;
 
     private String emergencyContact;
+
+    private Treatment treatment;
 }
