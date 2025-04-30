@@ -5,12 +5,14 @@ import MainLayout from "@/components/layout/layout";
 import Header from "@/components/layout/header";
 import AddNewDoctorForm from "./form/add-form";
 import { useAddNewDoctor } from "@/services/doctor-services";
+import { useGetAllTreatments } from "@/services/treatment-services";
 
 const AddNewDoctor = () => {
 
   // Declare state variables
   const navigate = useNavigate();
   const { mutate } = useAddNewDoctor();
+  const { data: treatments } = useGetAllTreatments();
 
     // Handle form submission
     const handleFormSubmit = (newDoctor) => {
@@ -35,7 +37,7 @@ const AddNewDoctor = () => {
     <MainLayout>
       <Header Title="Add New Doctor" />
       <div className="flex flex-1 flex-col gap-4 p-4">
-        <AddNewDoctorForm onSubmit={handleFormSubmit}/>
+        <AddNewDoctorForm treatments={treatments || []} onSubmit={handleFormSubmit}/>
       </div>
     </MainLayout>  
   )
