@@ -18,6 +18,8 @@ public class TreatmentDto {
 
     private String treatmentName;
 
+    private String treatmentCode;
+
     private String description;
 
     private String duration;

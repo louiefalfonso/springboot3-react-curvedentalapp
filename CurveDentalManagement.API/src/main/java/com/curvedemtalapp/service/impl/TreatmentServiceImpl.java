@@ -49,6 +49,7 @@ public class TreatmentServiceImpl implements TreatmentService {
                 .orElseThrow(()-> new RuntimeException("Treatment doesn't exist with a given Id:" + treatmentId));
 
         treatment.setTreatmentName(updateTreatment.getTreatmentName());
+        treatment.setTreatmentCode(updateTreatment.getTreatmentCode());
         treatment.setDescription(updateTreatment.getDescription());
         treatment.setDuration(updateTreatment.getDuration());
         treatment.setCost(updateTreatment.getCost());

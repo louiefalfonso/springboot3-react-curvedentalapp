@@ -51,6 +51,7 @@ public class TreatmentController {
                 .orElseThrow(()-> new RuntimeException("Treatment does not exist with id: " + id));
 
         updateTreatment.setTreatmentName(treatmentDetails.getTreatmentName());
+        updateTreatment.setTreatmentCode(treatmentDetails.getTreatmentCode());
         updateTreatment.setDescription(treatmentDetails.getDescription());
         updateTreatment.setDuration(treatmentDetails.getDuration());
         updateTreatment.setCost(treatmentDetails.getCost());

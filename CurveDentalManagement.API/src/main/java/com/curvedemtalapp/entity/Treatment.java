@@ -22,6 +22,8 @@ public class Treatment {
 
     private String treatmentName;
 
+    private String treatmentCode;
+
     private String description;
 
     private String duration;
