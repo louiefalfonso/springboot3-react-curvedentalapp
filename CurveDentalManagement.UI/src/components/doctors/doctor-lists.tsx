@@ -30,6 +30,7 @@ const DoctorLists = () => {
     dentalSchool: string;
     officeAddress: string;
     emergencyContact: string;
+    treatment: { treatmentName: string } | null;
 }
 
  // Filter doctor based on search query
@@ -37,7 +38,8 @@ const DoctorLists = () => {
   ? data.filter((doctor: Doctor) =>
       doctor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       doctor.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      doctor.specialization.toLowerCase().includes(searchQuery.toLowerCase())
+      doctor.specialization.toLowerCase().includes(searchQuery.toLowerCase())||
+      (doctor.treatment?.treatmentName.toLowerCase().includes(searchQuery.toLowerCase()))
     )
   : data;
 
@@ -71,6 +73,7 @@ const DoctorLists = () => {
                 <TableHead>Phone Number</TableHead>
                 <TableHead>Email Address</TableHead>
                 <TableHead>Schedule</TableHead>
+                <TableHead>Treatments</TableHead>
               </TableRow>
           </TableHeader>
           <TableBody>
@@ -81,6 +84,7 @@ const DoctorLists = () => {
                 <TableCell>{doctor.contactNumber}</TableCell>
                 <TableCell>{doctor.email}</TableCell>
                 <TableCell>{doctor.schedule}</TableCell>
+                <TableCell>{doctor.treatment ? doctor.treatment.treatmentName : 'N/A'}</TableCell>
                 <TableCell>
                   <Link to={`/doctors/details/${doctor.id}`}>
                     <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>

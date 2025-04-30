@@ -15,6 +15,7 @@ interface Doctor {
     dentalSchool?: string;
     officeAddress?: string;
     emergencyContact?: string;
+    treatment?: number; 
 }
 
 const API_BASE_URL = import.meta.env.VITE_BASE_URI_DOCTORS;
