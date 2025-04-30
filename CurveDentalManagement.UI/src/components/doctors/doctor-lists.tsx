@@ -32,7 +32,7 @@ const DoctorLists = () => {
     emergencyContact: string;
 }
 
- // Filter staff based on search query
+ // Filter doctor based on search query
  const filteredDoctors: Doctor[] = searchQuery
   ? data.filter((doctor: Doctor) =>
       doctor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||

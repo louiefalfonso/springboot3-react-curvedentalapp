@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 interface Treatment {
     id: string;
     treatmentName?: string;
+    treatmentCode?: string;
     description?: string;
     duration?: string;
     cost?: number;
@@ -11,7 +12,6 @@ interface Treatment {
     followUpCare?: string;
     riskBenefits?: string; 
     indications?: string;
-    doctor?: number;
 }
 
 const API_BASE_URL = import.meta.env.VITE_BASE_URI_TREATMENTS;
