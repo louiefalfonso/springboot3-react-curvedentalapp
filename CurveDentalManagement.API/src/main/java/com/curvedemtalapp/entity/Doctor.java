@@ -42,6 +42,10 @@ public class Doctor {
 
     private String emergencyContact;
 
+    @ManyToOne
+    @JoinColumn(name = "treatment_id")
+    private Treatment treatment;
+
 }
 
 

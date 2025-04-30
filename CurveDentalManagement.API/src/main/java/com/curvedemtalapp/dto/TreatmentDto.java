@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +18,8 @@ public class TreatmentDto {
     private Long id;
 
     private String treatmentName;
+
+    private String treatmentCode;
 
     private String description;
 
@@ -32,5 +35,5 @@ public class TreatmentDto {
 
     private String indications;
 
-    private Doctor doctor;
+    private List<Doctor> doctors;
 }

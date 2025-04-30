@@ -1,5 +1,6 @@
 package com.curvedemtalapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @Builder
@@ -22,6 +24,8 @@ public class Treatment {
 
     private String treatmentName;
 
+    private String treatmentCode;
+
     private String description;
 
     private String duration;
@@ -36,8 +40,8 @@ public class Treatment {
 
     private String indications;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
-    private Doctor doctor;
+    @JsonIgnore
+    @OneToMany(mappedBy = "treatment")
+    private List<Doctor> doctors;
 
 }
