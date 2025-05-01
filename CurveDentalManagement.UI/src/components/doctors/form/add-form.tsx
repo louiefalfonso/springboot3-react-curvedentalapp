@@ -156,8 +156,8 @@ const AddNewDoctorForm:React.FC<DoctorProps> = ({treatments, onSubmit}) => {
      </div>
 
      <div className="flex pl-4 mt-4 ">
-     <Button type="submit" className="mr-4 bg-green-500 hover:bg-green-600">Add New Doctor</Button>
-     <Link to={`/doctors`}> <Button className="bg-gray-500 hover:bg-gray-600">Back</Button> </Link>
+        <Button type="submit" className="mr-4 bg-green-500 hover:bg-green-600">Add New Doctor</Button>
+        <Link to={`/doctors`}> <Button className="bg-gray-500 hover:bg-gray-600">Back</Button> </Link>
      </div>
    </form>
   )

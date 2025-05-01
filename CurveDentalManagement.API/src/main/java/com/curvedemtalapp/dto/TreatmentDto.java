@@ -25,7 +25,7 @@ public class TreatmentDto {
 
     private String duration;
 
-    private BigDecimal cost;
+    private String cost;
 
     private String insuranceCoverage;
 
