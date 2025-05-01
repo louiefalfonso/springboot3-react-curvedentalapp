@@ -30,7 +30,7 @@ public class Treatment {
 
     private String duration;
 
-    private BigDecimal cost;
+    private String cost;
 
     private String insuranceCoverage;
 
