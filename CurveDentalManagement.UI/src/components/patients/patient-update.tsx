@@ -11,6 +11,7 @@ import { useGetPatientById, useUpdatePatient, useDeletePatient } from "@/service
 import UpdatePatientForm from "./form/update-form";
 
 const UpdatePatient = () => {
+  
   // get patient Id from URL
   const { id } = useParams();
   const navigate = useNavigate();
@@ -64,9 +65,9 @@ const UpdatePatient = () => {
         || !insuranceDetails || !insuranceProvider
         || !insurancePolicyNumber || !insuranceExpiryDate) {
         {
-        toast.error("Please fill in all required fields.");
-        return;
-      }
+          toast.error("Please fill in all required fields.");
+          return;
+        }
       }
       const currentPatient = {
         id: id || "",
@@ -119,7 +120,6 @@ const UpdatePatient = () => {
     }
    }
     
-
   return (
     <MainLayout>
       <Header Title="Update Patient" />

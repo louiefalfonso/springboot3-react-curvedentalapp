@@ -82,10 +82,10 @@ const TreatmentLists = () => {
               <TableCell>{treatment.cost}</TableCell>
               <TableCell>
                 <Link to={`/treatments/details/${treatment.id}`}>
-                      <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
+                    <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
                 </Link>
                 <Link to={`/treatments/update/${treatment.id}`}>
-                      <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>
+                    <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>
                 </Link>
               </TableCell>
             </TableRow>

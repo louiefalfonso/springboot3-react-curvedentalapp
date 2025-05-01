@@ -7,7 +7,7 @@ interface Treatment {
     treatmentCode?: string;
     description?: string;
     duration?: string;
-    cost?: number;
+    cost?: string;
     insuranceCoverage?: string;
     followUpCare?: string;
     riskBenefits?: string; 
