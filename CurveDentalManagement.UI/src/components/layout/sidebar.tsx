@@ -28,6 +28,11 @@ const items = [
       url: "/doctors",
       icon: BriefcaseMedical,
     },
+    {
+      title: "Treatments",
+      url: "/treatments",
+      icon: BriefcaseMedical,
+    },
     
   ];
 const AppSidebar = () => {
