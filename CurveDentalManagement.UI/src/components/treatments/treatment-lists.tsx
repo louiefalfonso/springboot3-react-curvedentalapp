@@ -67,19 +67,18 @@ const TreatmentLists = () => {
             <TableRow>
                 <TableHead>Treatment Code</TableHead>
                 <TableHead>Treatment Name</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead>Duration</TableHead>
-                <TableHead>Cost</TableHead>
+                <TableHead>Duration</TableHead> 
+                <TableHead>Indications</TableHead>
               </TableRow>
           </TableHeader>
           <TableBody>
           {paginatedTreatments.map((treatment: Treatment) => (
             <TableRow key={treatment.id}>
               <TableCell>{treatment.treatmentCode}</TableCell>
-              <TableCell>{treatment.treatmentName}</TableCell> 
-              <TableCell>{treatment.description}</TableCell>
-              <TableCell>{treatment.duration}</TableCell>
-              <TableCell>{treatment.cost}</TableCell>
+              <TableCell>{treatment.treatmentName}</TableCell>
+              <TableCell>{treatment.duration}</TableCell>    
+              <TableCell>{treatment.indications}</TableCell>
+       
               <TableCell>
                 <Link to={`/treatments/details/${treatment.id}`}>
                     <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
@@ -91,7 +90,26 @@ const TreatmentLists = () => {
             </TableRow>
           ))}
           </TableBody>
-        </Table>  
+        </Table>
+        <div className="flex justify-between items-center mt-4">
+          <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious onClick={() => handlePageChange(currentPage - 1)}/>
+                </PaginationItem>
+                {[...Array(totalPages)].map((_, index) => (
+                  <PaginationItem key={index}>
+                    <PaginationLink onClick={() => handlePageChange(index + 1)}>
+                      {index + 1}
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext onClick={() => handlePageChange(currentPage + 1)}/>
+                </PaginationItem>
+              </PaginationContent>
+          </Pagination>
+        </div>  
       </div>
     </div>  
   )
