@@ -62,22 +62,22 @@ const AddNewTreatmentForm:React.FC<TreatmentProps> = ({onSubmit}) => {
         <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="treatmentCode">Treatment Code:</Label>
           <Input type="text" id="treatmentCode" placeholder="Treatment Code" onChange={(e) => handleInputChange("treatmentCode", e.target.value)}/>
-          <Label htmlFor="treatmentName">Treatment Name:</Label>
-          <Input type="text" id="treatmentName" placeholder="Treatment Name" onChange={(e) => handleInputChange("treatmentName", e.target.value)}/>
-          <Label htmlFor="cost">Cost Amount:</Label>
-          <Input type="text" id="cost" placeholder="Cost Amount" onChange={(e) => handleInputChange("cost", e.target.value)}/>
-        </div>
-        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="followUpCare">Follow Up Care:</Label>
+          <Textarea id="followUpCare" placeholder="Follow Up Care" onChange={(e) => handleInputChange("followUpCare", e.target.value)}/>
           <Label htmlFor="description">Treatment Description:</Label>
           <Textarea id="description" placeholder="Treatment Description" onChange={(e) => handleInputChange("description", e.target.value)}/>
+        </div>
+        <div className="grid w-full items-center gap-4 p-4">
+        <Label htmlFor="treatmentName">Treatment Name:</Label>
+        <Input type="text" id="treatmentName" placeholder="Treatment Name" onChange={(e) => handleInputChange("treatmentName", e.target.value)}/>
           <Label htmlFor="duration">Duration:</Label>
           <Textarea id="duration" placeholder="Duration" onChange={(e) => handleInputChange("duration", e.target.value)}/>
           <Label htmlFor="insuranceCoverage">Insurance Coverage:</Label>
           <Textarea id="insuranceCoverage" placeholder="Insurance Coverage" onChange={(e) => handleInputChange("insuranceCoverage", e.target.value)}/>    
         </div>
         <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="followUpCare">Follow Up Care:</Label>
-          <Textarea id="followUpCare" placeholder="Follow Up Care" onChange={(e) => handleInputChange("followUpCare", e.target.value)}/>
+          <Label htmlFor="cost">Cost Amount:</Label>
+          <Input type="text" id="cost" placeholder="Cost Amount" onChange={(e) => handleInputChange("cost", e.target.value)}/>
           <Label htmlFor="riskBenefits">Risk & Benefits:</Label>
           <Textarea id="riskBenefits" placeholder="Risk & Benefits" onChange={(e) => handleInputChange("riskBenefits", e.target.value)}/>
           <Label htmlFor="indications">Indications:</Label>
@@ -86,7 +86,7 @@ const AddNewTreatmentForm:React.FC<TreatmentProps> = ({onSubmit}) => {
       </div>
 
       <div className="flex pl-4 mt-4 ">
-        <Button type="submit" className="mr-4 bg-green-500 hover:bg-green-600">Add New Patient</Button>
+        <Button type="submit" className="mr-4 bg-green-500 hover:bg-green-600">Add New Treatment</Button>
         <Link to={`/treatments`}> <Button className="bg-gray-500 hover:bg-gray-600">Back</Button> </Link>
       </div>
     </form>

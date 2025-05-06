@@ -6,29 +6,29 @@ import Header from "@/components/layout/header";
 import { useAddNewTreatment } from "@/services/treatment-services";
 import AddNewTreatmentForm from "./form/add-form";
 
+const SUCCESS_MESSAGE = "Treatment Added Successfully";
+const ERROR_MESSAGE = "Failed to Add Treatment.";
+
 const AddNewTreatment = () => {
 
    // Declare state variables
    const navigate = useNavigate();
    const { mutate } = useAddNewTreatment()
 
-  // Handle form submission
+  // Handle form submission for adding a new treatment
   const handleFormSubmit = (newTreatment) => {
-    try {
-      mutate(newTreatment, {
-        onSuccess: () => {
-          toast.success("Treatment Added Successfully");
-          navigate("/treatments");
-        },
-        onError: (error) => {
-          console.error("Error Adding Treatment:", error);
-          toast.error("Failed to Add Treatment.");
-        },
-      });
-    } catch (error) {
-      console.error("Unexpected error:", error);
-      toast.error("Unexpected error occurred.");
-    }
+    mutate(newTreatment, {
+      onSuccess: () => {
+        // Show success message and navigate to treatments list
+        toast.success(SUCCESS_MESSAGE);
+        navigate("/treatments");
+      },
+      onError: (error: unknown) => {
+        // Log error and show error message
+        console.error("Error Adding Treatment:", error);
+        toast.error(ERROR_MESSAGE);
+      },
+    });
   };
 
   return (
