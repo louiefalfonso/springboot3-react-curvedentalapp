@@ -27,11 +27,9 @@ const AddNewTreatmentForm:React.FC<TreatmentProps> = ({onSubmit}) => {
     treatmentName: "",
     treatmentCode: "",
     cost: "",
-
     description: "",
     duration: "",
     insuranceCoverage: "",
-
     followUpCare: "",
     riskBenefits: "", 
     indications: "",
