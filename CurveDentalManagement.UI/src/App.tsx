@@ -19,6 +19,10 @@ import TreatmentListsPage from './pages/treatments/page';
 import AddNewTreatment from './components/treatments/treatment-add';
 import UpdateTreatment from './components/treatments/treatment-update';
 import TreatmentDetails from './components/treatments/treatment-details';
+import AppointmentListsPage from './pages/appointments/page';
+import AddNewAppointment from './components/appointments/appointment-add';
+import UpdateAppointment from './components/appointments/appointment-update';
+import AppointmentDetails from './components/appointments/appointment-details';
 
 function App() {
   return (
@@ -43,8 +47,13 @@ function App() {
         <Route path="/treatments" element={<TreatmentListsPage/>} />
         <Route path="/treatments/add" element={<AddNewTreatment/>} /> 
         <Route path="/treatments/update/:id" element={<UpdateTreatment/>} /> 
-        <Route path="/treatments/details/:id" element={<TreatmentDetails/>} />  
-        
+        <Route path="/treatments/details/:id" element={<TreatmentDetails/>} /> 
+
+        <Route path="/appointments" element={<AppointmentListsPage/>} />
+        <Route path="/appointments/add" element={<AddNewAppointment/>} />
+        <Route path="/appointments/update/:id" element={<UpdateAppointment/>} />
+        <Route path="/appointments/details/:id" element={<AppointmentDetails/>} />    
+          
       </Routes>
       <Toaster />
     </>
