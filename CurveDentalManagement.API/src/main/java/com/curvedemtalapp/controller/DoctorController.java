@@ -61,7 +61,7 @@ public class DoctorController {
         updateDoctor.setDentalSchool(doctorDetails.getDentalSchool());
         updateDoctor.setOfficeAddress(doctorDetails.getOfficeAddress());
         updateDoctor.setEmergencyContact(doctorDetails.getEmergencyContact());
-        updateDoctor.setTreatment(doctorDetails.getTreatment());
+        //updateDoctor.setTreatment(doctorDetails.getTreatment());
 
         doctorRepository.save(updateDoctor);
         return  ResponseEntity.ok(updateDoctor);

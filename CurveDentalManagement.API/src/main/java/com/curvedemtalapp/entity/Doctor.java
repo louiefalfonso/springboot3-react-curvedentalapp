@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -42,9 +44,13 @@ public class Doctor {
 
     private String emergencyContact;
 
-    @ManyToOne
-    @JoinColumn(name = "treatment_id")
-    private Treatment treatment;
+    @ManyToMany
+    @JoinTable(
+            name = "doctor_treatment",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "treatment_id")
+    )
+    private List<Treatment> treatments;
 
 }
 

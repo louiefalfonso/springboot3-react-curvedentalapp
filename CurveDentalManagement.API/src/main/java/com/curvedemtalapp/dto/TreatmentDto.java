@@ -1,6 +1,8 @@
 package com.curvedemtalapp.dto;
 
 import com.curvedemtalapp.entity.Doctor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
