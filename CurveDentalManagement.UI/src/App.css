@@ -39,8 +39,15 @@
   background-color: #fff;
 }
 
+
+
 @media (max-width: 768px) {
   .header-title {
     display: none;
   }
+}
+
+.custom-select__menu {
+  max-height: 200px;
+  overflow-y: auto; 
 }

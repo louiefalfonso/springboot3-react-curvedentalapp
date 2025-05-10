@@ -1,18 +1,11 @@
 import React from "react";
 import Select from "react-select";
-
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-//import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import DeleteDoctorDialog from "../doctor-delete";
-
-type Treatment = {
-  id: number;
-  treatmentName: string;
-};
 
 type DoctorFormProps = {
   doctorData: {
@@ -79,6 +72,30 @@ const UpdateDoctorForm: React.FC<DoctorFormProps> = React.memo(({
       <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">
         Professional Information
       </h2>
+      <div className="grid auto-rows-min md:grid-cols-1">
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="treatment">Treatments:</Label>
+          <Select isMulti
+            options={treatments?.map((treatment) => ({
+                value: treatment.id,
+                label: treatment.treatmentName,
+            }))}
+            value={treatmentIds.map((id) => ({
+                value: id,
+                label: treatments?.find((treatment) => treatment.id === id)?.treatmentName,
+            }))}
+            onChange={(selectedOptions) => {
+                // Ensure selectedOptions is not null or undefined
+                if (selectedOptions) {
+                setTreatmentIds(selectedOptions.map((option) => option.value));
+                } else {
+                setTreatmentIds([]); // Clear the selection if no options are selected
+                }
+            }}
+             classNamePrefix="custom-select"
+            />
+        </div>
+      </div>
       <div className="grid auto-rows-min md:grid-cols-3">
         <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="licenseNumber">License Number:</Label>
@@ -134,29 +151,7 @@ const UpdateDoctorForm: React.FC<DoctorFormProps> = React.memo(({
           />
         </div>
       </div>
-      <div className="grid auto-rows-min md:grid-cols-1">
-        <div className="grid w-full items-center gap-4 p-4">
-          <Label htmlFor="treatment">Treatments:</Label>
-          <Select isMulti
-            options={treatments?.map((treatment) => ({
-                value: treatment.id,
-                label: treatment.treatmentName,
-            }))}
-            value={treatmentIds.map((id) => ({
-                value: id,
-                label: treatments?.find((treatment) => treatment.id === id)?.treatmentName,
-            }))}
-            onChange={(selectedOptions) => {
-                // Ensure selectedOptions is not null or undefined
-                if (selectedOptions) {
-                setTreatmentIds(selectedOptions.map((option) => option.value));
-                } else {
-                setTreatmentIds([]); // Clear the selection if no options are selected
-                }
-            }}
-            />
-        </div>
-      </div>
+      
 
       <div className="flex pl-4 mt-4">
         <Button type="submit" className="bg-orange-600 hover:bg-orange-700" aria-label="Update Doctor">

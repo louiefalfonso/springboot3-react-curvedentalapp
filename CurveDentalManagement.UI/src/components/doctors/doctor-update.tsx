@@ -117,13 +117,13 @@ const UpdateDoctor = () => {
         <div className="flex flex-1 flex-col gap-4 p-4">
           <UpdateDoctorForm
             doctorData={doctorData}
-          setDoctorData={setDoctorData}
-          treatmentIds={treatmentIds}
-          setTreatmentIds={setTreatmentIds}
-          treatments={treatments}
-          handleSubmit={handleSubmit}
-          handleDelete={handleDelete}
-          doctorId={id || ""}
+            setDoctorData={setDoctorData}
+            treatmentIds={treatmentIds}
+            setTreatmentIds={setTreatmentIds}
+            treatments={treatments}
+            handleSubmit={handleSubmit}
+            handleDelete={handleDelete}
+            doctorId={id || ""}
           />
         </div>
      <Toaster />

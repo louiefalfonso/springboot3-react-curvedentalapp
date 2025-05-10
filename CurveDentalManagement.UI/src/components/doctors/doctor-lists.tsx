@@ -85,7 +85,7 @@ const DoctorLists = () => {
             <TableRow>
                 <TableHead>Full Name</TableHead>
                 <TableHead>Specialization</TableHead>
-                <TableHead>Email Address</TableHead>
+                <TableHead>Department</TableHead>
                 <TableHead>Schedule</TableHead>
                 <TableHead>Treatments</TableHead>
               </TableRow>
@@ -95,7 +95,7 @@ const DoctorLists = () => {
               <TableRow key={doctor.id}>
                 <TableCell>Dr. {doctor.firstName} {doctor.lastName}</TableCell>
                 <TableCell>{doctor.specialization}</TableCell>
-                <TableCell>{doctor.email}</TableCell>
+                <TableCell>{doctor.department}</TableCell>
                 <TableCell>{doctor.schedule}</TableCell>
                 <TableCell>
                   {doctor.treatments.length > 0 ? doctor.treatments.map(treatment => treatment.treatmentName).join(', ') : 'N/A'}
