@@ -41,7 +41,7 @@ public class Treatment {
     private String indications;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "treatment")
+    @ManyToMany(mappedBy = "treatments")
     private List<Doctor> doctors;
 
 }

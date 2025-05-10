@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,5 +40,5 @@ public class DoctorDto {
 
     private String emergencyContact;
 
-    private Treatment treatment;
+    private List<Treatment> treatments;
 }

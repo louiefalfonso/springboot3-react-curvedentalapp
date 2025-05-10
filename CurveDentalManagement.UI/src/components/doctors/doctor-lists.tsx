@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -5,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious, } from "@/components/ui/pagination"
 import { useGetAllDoctors } from "@/services/doctor-services";
+
 const DoctorLists = () => {
   // declare state variables
   const { data, isLoading, refetch } = useGetAllDoctors();
@@ -15,6 +17,19 @@ const DoctorLists = () => {
   // Handle loading state
   if (isLoading) { return <div>Loading...</div>;}
   if (!data) { return <div>No data found</div>;}
+
+  interface Treatment {
+    id: number;
+    treatmentName: string;
+    treatmentCode: string;
+    description: string;
+    duration: string;
+    cost: string;
+    insuranceCoverage: string;
+    followUpCare: string;
+    riskBenefits: string;
+    indications: string;
+  }
 
   interface Doctor {
     id: string; 
@@ -30,18 +45,18 @@ const DoctorLists = () => {
     dentalSchool: string;
     officeAddress: string;
     emergencyContact: string;
-    treatment: { treatmentName: string } | null;
-}
+    treatments: Treatment[];
+  }
 
- // Filter doctor based on search query
- const filteredDoctors: Doctor[] = searchQuery
-  ? data.filter((doctor: Doctor) =>
-      doctor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      doctor.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || 
-      doctor.specialization.toLowerCase().includes(searchQuery.toLowerCase())||
-      (doctor.treatment?.treatmentName.toLowerCase().includes(searchQuery.toLowerCase()))
-    )
-  : data;
+  // Filter doctor based on search query
+  const filteredDoctors: Doctor[] = searchQuery
+    ? data.filter((doctor: Doctor) =>
+        doctor.firstName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        doctor.lastName.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        doctor.specialization.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        doctor.treatments.some(treatment => treatment.treatmentName.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : data;
 
   // Pagination
   const totalPages = Math.ceil(filteredDoctors.length / itemsPerPage);
@@ -70,8 +85,7 @@ const DoctorLists = () => {
             <TableRow>
                 <TableHead>Full Name</TableHead>
                 <TableHead>Specialization</TableHead>
-                <TableHead>Phone Number</TableHead>
-                <TableHead>Email Address</TableHead>
+                <TableHead>Department</TableHead>
                 <TableHead>Schedule</TableHead>
                 <TableHead>Treatments</TableHead>
               </TableRow>
@@ -81,10 +95,11 @@ const DoctorLists = () => {
               <TableRow key={doctor.id}>
                 <TableCell>Dr. {doctor.firstName} {doctor.lastName}</TableCell>
                 <TableCell>{doctor.specialization}</TableCell>
-                <TableCell>{doctor.contactNumber}</TableCell>
-                <TableCell>{doctor.email}</TableCell>
+                <TableCell>{doctor.department}</TableCell>
                 <TableCell>{doctor.schedule}</TableCell>
-                <TableCell>{doctor.treatment ? doctor.treatment.treatmentName : 'N/A'}</TableCell>
+                <TableCell>
+                  {doctor.treatments.length > 0 ? doctor.treatments.map(treatment => treatment.treatmentName).join(', ') : 'N/A'}
+                </TableCell>
                 <TableCell>
                   <Link to={`/doctors/details/${doctor.id}`}>
                     <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
@@ -121,4 +136,4 @@ const DoctorLists = () => {
   )
 }
 
-export default DoctorLists
+export default DoctorLists;

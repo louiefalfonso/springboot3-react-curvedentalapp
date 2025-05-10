@@ -3,6 +3,7 @@ package com.curvedemtalapp.service.impl;
 import com.curvedemtalapp.dto.DoctorDto;
 import com.curvedemtalapp.entity.Doctor;
 import com.curvedemtalapp.repository.DoctorRepository;
+import com.curvedemtalapp.repository.TreatmentRepository;
 import com.curvedemtalapp.service.DoctorService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class DoctorServiceImpl implements DoctorService {
 
     private DoctorRepository doctorRepository;
+    private TreatmentRepository treatmentRepository;
     private ModelMapper modelMapper;
 
     // REST API - Create New Patient
@@ -60,7 +62,7 @@ public class DoctorServiceImpl implements DoctorService {
         doctor.setDentalSchool(updateDoctor.getDentalSchool());
         doctor.setOfficeAddress(updateDoctor.getOfficeAddress());
         doctor.setEmergencyContact(updateDoctor.getEmergencyContact());
-        doctor.setTreatment(updateDoctor.getTreatment());
+        doctor.setTreatments(updateDoctor.getTreatments());
 
         Doctor updateDoctorObj = doctorRepository.save(doctor);
         return modelMapper.map(updateDoctorObj, DoctorDto.class);

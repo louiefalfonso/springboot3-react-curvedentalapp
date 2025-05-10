@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 type Treatment = {
     id: number;
@@ -139,21 +140,35 @@ const AddNewDoctorForm:React.FC<DoctorProps> = ({treatments, onSubmit}) => {
      <div className="grid auto-rows-min md:grid-cols-2">
         <div className="grid w-full items-center gap-4 p-4">
             <Label htmlFor="treatment">Treatments:</Label>
-            <div className="flex flex-col">
-              {treatments?.map((treatment: Treatment) => (
-                <label key={treatment.id} className="flex items-center">
-                  <input
+            <div className="flex flex-row flex-wrap">
+            {treatments?.map((treatment: Treatment) => (
+                <label key={treatment.id} className="flex items-center mr-4">
+                <input
                     type="checkbox"
                     value={treatment.id}
                     checked={selectedTreatments.some(t => t.id === treatment.id)}
                     onChange={() => handleTreatmentSelect(treatment.id)}
-                  />
-                  <span className="ml-2">{treatment.treatmentName}</span>
+                />
+                <span className="ml-2">{treatment.treatmentName}</span>
                 </label>
-              ))}
+            ))}
+
+            <Label htmlFor="treatment">Treatments:</Label>
+            <Select onValueChange={(value) => handleTreatmentSelect(parseInt(value))}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Treatments" />
+                </SelectTrigger>
+                <SelectContent>
+                  {treatments?.map((treatment: Treatment) => (
+                    <SelectItem key={treatment.id} value={treatment.id.toString()}>
+                      {treatment.treatmentName}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
         </div>
-     </div>
+        </div>
 
      <div className="flex pl-4 mt-4 ">
         <Button type="submit" className="mr-4 bg-green-500 hover:bg-green-600">Add New Doctor</Button>
