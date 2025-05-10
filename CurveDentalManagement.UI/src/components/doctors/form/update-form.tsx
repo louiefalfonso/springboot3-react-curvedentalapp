@@ -1,120 +1,174 @@
 import React from "react";
+import Select from "react-select";
+
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+//import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import DeleteDoctorDialog from "../doctor-delete";
 
-type DoctorFormProps ={
-    firstName: string;
-    setFirstName: (value: string) => void;
-    lastName: string;
-    setLastName: (value: string) => void;
-    email: string;
-    setEmail: (value: string) => void;
-    contactNumber: string;
-    setContactNumber: (value: string) => void;
-    specialization: string;
-    setSpecialization: (value: string) => void;
-    department: string;
-    setDepartment: (value: string) => void;
-    schedule: string;
-    setSchedule: (value: string) => void;
-    licenseNumber: string;
-    setLicenseNumber: (value: string) => void;
-    yearsOfExperience: string;
-    setYearsOfExperience: (value: string) => void;
-    dentalSchool: string;
-    setDentalSchool: (value: string) => void;
-    officeAddress: string;
-    setOfficeAddress: (value: string) => void;
-    emergencyContact: string;
-    setEmergencyContact: (value: string) => void;
-    handleSubmit: (e: React.FormEvent) => void;
-    handleDelete: () => void;
-    doctorId: string;
-}
+type Treatment = {
+  id: number;
+  treatmentName: string;
+};
 
-const UpdateDoctorForm: React.FC<DoctorFormProps> = React.memo (({
-    firstName, setFirstName,
-    lastName, setLastName,
-    email, setEmail,
-    contactNumber, setContactNumber,
-    specialization, setSpecialization,
-    department, setDepartment,
-    schedule, setSchedule,
-    licenseNumber, setLicenseNumber,
-    yearsOfExperience, setYearsOfExperience,
-    dentalSchool, setDentalSchool,
-    officeAddress, setOfficeAddress,
-    emergencyContact, setEmergencyContact,
-    handleSubmit, handleDelete, doctorId
+type DoctorFormProps = {
+  doctorData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    contactNumber: string;
+    specialization: string;
+    department: string;
+    schedule: string;
+    licenseNumber: string;
+    yearsOfExperience: string;
+    dentalSchool: string;
+    officeAddress: string;
+    emergencyContact: string;
+  };
+  setDoctorData: (data: Partial<DoctorFormProps["doctorData"]>) => void;
+  treatmentIds: number[];
+  setTreatmentIds: (value: number[]) => void;
+  treatments: { id: number; treatmentName: string }[] | undefined;
+  handleSubmit: (e: React.FormEvent) => void;
+  handleDelete: () => void;
+  doctorId: string;
+};
+
+const UpdateDoctorForm: React.FC<DoctorFormProps> = React.memo(({
+  doctorData,
+  setDoctorData,
+  treatmentIds = [],
+  setTreatmentIds,
+  treatments = [],
+  handleSubmit,
+  handleDelete,
+  doctorId,
 }) => {
- const formFields =[
-    { label: "First Name", id: "firstName", value: firstName, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setFirstName(e.target.value) },
-    { label: "Last Name", id: "lastName", value: lastName, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setLastName(e.target.value) },
-    { label: "Specialization", id: "specialization", value: specialization, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setSpecialization(e.target.value) },
-    { label: "Phone Number", id: "contactNumber", value: contactNumber, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setContactNumber(e.target.value) },
-    { label: "Email Address", id: "email", value: email, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value) }, 
-    { label: "Department", id: "department", value: department, onChange: (e: React.ChangeEvent<HTMLInputElement>) => setDepartment(e.target.value) }
- ]
+  // Define form fields dynamically
+  const formFields = [
+    { label: "First Name", id: "firstName", value: doctorData.firstName },
+    { label: "Last Name", id: "lastName", value: doctorData.lastName },
+    { label: "Specialization", id: "specialization", value: doctorData.specialization },
+    { label: "Phone Number", id: "contactNumber", value: doctorData.contactNumber },
+    { label: "Email Address", id: "email", value: doctorData.email },
+    { label: "Department", id: "department", value: doctorData.department },
+  ];
 
   return (
     <form onSubmit={handleSubmit}>
-        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Doctor Information</h2>
-        <div className="grid auto-rows-min md:grid-cols-3">
-            {formFields.map(({ label, id, value, onChange }) => (
-            <div key={id} className="grid w-full items-center gap-4 p-4">
-                <Label htmlFor={id}>{label}:</Label>
-                <Input type="text" id={id} value={value} onChange={onChange} />
-            </div>
+      <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">
+        Doctor Information
+      </h2>
+      <div className="grid auto-rows-min md:grid-cols-3">
+        {formFields.map(({ label, id, value }) => (
+          <div key={id} className="grid w-full items-center gap-4 p-4">
+            <Label htmlFor={id}>{label}:</Label>
+            <Input
+              type="text"
+              id={id}
+              value={value}
+              onChange={(e) => setDoctorData({ [id]: e.target.value })}
+            />
+          </div>
         ))}
+      </div>
+      <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">
+        Professional Information
+      </h2>
+      <div className="grid auto-rows-min md:grid-cols-3">
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="licenseNumber">License Number:</Label>
+          <Input
+            type="text"
+            id="licenseNumber"
+            value={doctorData.licenseNumber}
+            onChange={(e) => setDoctorData({ licenseNumber: e.target.value })}
+          />
         </div>
-        <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0 m-4">Professional Information</h2>
-        <div className="grid auto-rows-min md:grid-cols-3">
-            <div className="grid w-full items-center gap-4 p-4">
-                <Label htmlFor="licenseNumber">License Number:</Label>
-                <Input type="text" id="licenseNumber" value={licenseNumber} onChange={(e) => setLicenseNumber( e.target.value)}/>
-            </div>
-            <div className="grid w-full items-center gap-4 p-4">
-                <Label htmlFor="yearsOfExperience">Years Of Experience:</Label>
-                <Input type="text" id="yearsOfExperience" value={yearsOfExperience} onChange={(e) => setYearsOfExperience(e.target.value)}/>
-            </div>
-            <div className="grid w-full items-center gap-4 p-4">
-                <Label htmlFor="dentalSchool">Dental School:</Label>
-                <Input type="text" id="dentalSchool" value={dentalSchool} onChange={(e) => setDentalSchool(e.target.value)}/>
-            </div>    
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="yearsOfExperience">Years Of Experience:</Label>
+          <Input
+            type="text"
+            id="yearsOfExperience"
+            value={doctorData.yearsOfExperience}
+            onChange={(e) => setDoctorData({ yearsOfExperience: e.target.value })}
+          />
         </div>
-        <div className="grid auto-rows-min md:grid-cols-3">
-            <div className="grid w-full items-center gap-4 p-4">
-                <Label htmlFor="schedule">Schedule:</Label>
-                <Textarea id="schedule" value={schedule} onChange={(e) => setSchedule( e.target.value)}/>
-            </div>
-            <div className="grid w-full items-center gap-4 p-4">
-                <Label htmlFor="officeAddress">Office Address:</Label>
-                <Textarea id="officeAddress" value={officeAddress} onChange={(e) => setOfficeAddress(e.target.value)}/>
-            </div>
-            <div className="grid w-full items-center gap-4 p-4">
-                <Label htmlFor="emergencyContact">Emergency Contact:</Label>
-                <Textarea id="emergencyContact" value={emergencyContact} onChange={(e) => setEmergencyContact(e.target.value)}/>
-            </div>
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="dentalSchool">Dental School:</Label>
+          <Input
+            type="text"
+            id="dentalSchool"
+            value={doctorData.dentalSchool}
+            onChange={(e) => setDoctorData({ dentalSchool: e.target.value })}
+          />
         </div>
-     
+      </div>
+      <div className="grid auto-rows-min md:grid-cols-3">
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="schedule">Schedule:</Label>
+          <Textarea
+            id="schedule"
+            value={doctorData.schedule}
+            onChange={(e) => setDoctorData({ schedule: e.target.value })}
+          />
+        </div>
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="officeAddress">Office Address:</Label>
+          <Textarea
+            id="officeAddress"
+            value={doctorData.officeAddress}
+            onChange={(e) => setDoctorData({ officeAddress: e.target.value })}
+          />
+        </div>
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="emergencyContact">Emergency Contact:</Label>
+          <Textarea
+            id="emergencyContact"
+            value={doctorData.emergencyContact}
+            onChange={(e) => setDoctorData({ emergencyContact: e.target.value })}
+          />
+        </div>
+      </div>
+      <div className="grid auto-rows-min md:grid-cols-1">
+        <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="treatment">Treatments:</Label>
+          <Select isMulti
+            options={treatments?.map((treatment) => ({
+                value: treatment.id,
+                label: treatment.treatmentName,
+            }))}
+            value={treatmentIds.map((id) => ({
+                value: id,
+                label: treatments?.find((treatment) => treatment.id === id)?.treatmentName,
+            }))}
+            onChange={(selectedOptions) => {
+                // Ensure selectedOptions is not null or undefined
+                if (selectedOptions) {
+                setTreatmentIds(selectedOptions.map((option) => option.value));
+                } else {
+                setTreatmentIds([]); // Clear the selection if no options are selected
+                }
+            }}
+            />
+        </div>
+      </div>
 
-        <div className="flex pl-4 mt-4 ">
-            <Button type="submit" className=" bg-orange-600 hover:bg-orange-700" aria-label="Update Doctor">
-            Update Doctor
-            </Button>
-            <DeleteDoctorDialog doctorId={doctorId} onDelete={handleDelete}/>
-            <Link to={`/doctors`}>
-                <Button className ="bg-gray-500 hover:bg-gray-600">
-                Cancel
-                </Button>
-            </Link>
-        </div>
+      <div className="flex pl-4 mt-4">
+        <Button type="submit" className="bg-orange-600 hover:bg-orange-700" aria-label="Update Doctor">
+          Update Doctor
+        </Button>
+        <DeleteDoctorDialog doctorId={doctorId} onDelete={handleDelete} />
+        <Link to={`/doctors`}>
+          <Button className="bg-gray-500 hover:bg-gray-600">Cancel</Button>
+        </Link>
+      </div>
     </form>
+  );
+});
 
-)
-})
-export default UpdateDoctorForm
+export default UpdateDoctorForm;

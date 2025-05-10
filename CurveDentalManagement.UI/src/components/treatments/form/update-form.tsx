@@ -59,23 +59,34 @@ const UpdateTreatmentForm: React.FC<TreatmentFormProps> = React.memo(({
           </div>
         ))}
 
-       <div className="grid w-full items-center gap-4 p-4">
+        
+        
+      </div>
+      <div className="grid auto-rows-min md:grid-cols-3">
+        <div className="grid w-full items-center gap-4 p-4">
           <Label htmlFor="description">Treatment Description:</Label>
           <Textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)}/>
           <Label htmlFor="duration">Duration:</Label>
           <Textarea id="duration" value={duration} onChange={(e) => setDuration(e.target.value)}/>
-          <Label htmlFor="insuranceCoverage">Insurance Coverage:</Label>
-          <Textarea id="insuranceCoverage" value={insuranceCoverage} onChange={(e) => setInsuranceCoverage(e.target.value)}/>    
+            
         </div>
         <div className="grid w-full items-center gap-4 p-4">
+          <Label htmlFor="insuranceCoverage">Insurance Coverage:</Label>
+          <Textarea id="insuranceCoverage" value={insuranceCoverage} onChange={(e) => setInsuranceCoverage(e.target.value)}/>  
           <Label htmlFor="followUpCare">Follow Up Care:</Label>
           <Textarea id="followUpCare" value={followUpCare} onChange={(e) => setFollowUpCare(e.target.value)}/>
+        </div>
+        <div className="grid w-full items-center gap-4 p-4">
+          
           <Label htmlFor="riskBenefits">Risk & Benefits:</Label>
           <Textarea id="riskBenefits" value={riskBenefits} onChange={(e) => setRiskBenefits(e.target.value)}/>
           <Label htmlFor="indications">Indications:</Label>
           <Textarea id="indications" value={indications} onChange={(e) => setIndications(e.target.value)}/>    
         </div>
       </div>
+      
+      
+      
       <div className="flex pl-4 mt-4 ">
         <Button type="submit" className=" bg-orange-600 hover:bg-orange-700" aria-label="Update Treatment">Update Treatment</Button>
         <DeleteTreatmentDialog treatmentId={treatementId} onDelete={handleDelete} aria-label="Delete Treatment"/>
