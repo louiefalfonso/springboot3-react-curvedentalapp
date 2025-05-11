@@ -41,6 +41,7 @@ const UpdateDoctorForm: React.FC<DoctorFormProps> = React.memo(({
   handleDelete,
   doctorId,
 }) => {
+  
   // Define form fields dynamically
   const formFields = [
     { label: "First Name", id: "firstName", value: doctorData.firstName },

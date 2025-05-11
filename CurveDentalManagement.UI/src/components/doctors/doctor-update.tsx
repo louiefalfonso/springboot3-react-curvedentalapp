@@ -11,18 +11,15 @@ import { useGetAllTreatments } from "@/services/treatment-services";
 import UpdateDoctorForm from "./form/update-form"
 
 const UpdateDoctor = () => {
-
-  // get doctor Id from URL
+  
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // fetch doctor data
   const { data, isLoading } = useGetDoctorById(id || "");
   const { mutate } = useUpdateDoctor(id || "");
   const { mutate: deleteDoctor } = useDeleteDoctor();
   const { data: treatments } = useGetAllTreatments();
 
-  // State for doctor details
   const [doctorData, setDoctorData] = useState({
     firstName: "",
     lastName: "",
@@ -38,10 +35,8 @@ const UpdateDoctor = () => {
     emergencyContact: "",
   });
 
-    // State for selected treatments
   const [treatmentIds, setTreatmentIds] = useState<number[]>([]);
 
-    // Set form values when data is fetched
   useEffect(() => {
     if (data) {
       setDoctorData({
@@ -62,17 +57,20 @@ const UpdateDoctor = () => {
     }
   }, [data]);
 
+  if (isLoading) return <div>Loading...</div>;
+  if (!data) return <div>No data found</div>;
 
-  if (isLoading) { return <div>Loading...</div>;}
-  if (!data) { return <div>No data found</div>;}
-  
+  const updateDoctorData = (data: Partial<typeof doctorData>) => {
+    setDoctorData((prev) => ({ ...prev, ...data }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-     const currentDoctor = {
+    const currentDoctor = {
       id: id || "",
       ...doctorData,
-      treatments: treatmentIds.map((id) => ({ id })), // Map treatment IDs to objects
+      treatments: treatmentIds.map((id) => ({ id })),
     };
 
     try {
@@ -90,10 +88,9 @@ const UpdateDoctor = () => {
       console.error("Unexpected error:", error);
       toast.error("An unexpected error occurred. Please try again.");
     }
-  }
+  };
 
-  // delete doctor
-  const handleDelete = () =>{
+  const handleDelete = () => {
     try {
       deleteDoctor(id || "", {
         onSuccess: () => {
@@ -109,26 +106,26 @@ const UpdateDoctor = () => {
       console.error("Unexpected error:", error);
       toast.error("An unexpected error occurred. Please try again.");
     }
-  }
+  };
 
   return (
     <MainLayout>
       <Header Title="Update Doctor" />
-        <div className="flex flex-1 flex-col gap-4 p-4">
-          <UpdateDoctorForm
-            doctorData={doctorData}
-            setDoctorData={setDoctorData}
-            treatmentIds={treatmentIds}
-            setTreatmentIds={setTreatmentIds}
-            treatments={treatments}
-            handleSubmit={handleSubmit}
-            handleDelete={handleDelete}
-            doctorId={id || ""}
-          />
-        </div>
-     <Toaster />
-    </MainLayout>      
-  )
-}
+      <div className="flex flex-1 flex-col gap-4 p-4">
+        <UpdateDoctorForm
+          doctorData={doctorData}
+          setDoctorData={updateDoctorData}
+          treatmentIds={treatmentIds}
+          setTreatmentIds={setTreatmentIds}
+          treatments={treatments}
+          handleSubmit={handleSubmit}
+          handleDelete={handleDelete}
+          doctorId={id || ""}
+        />
+      </div>
+      <Toaster />
+    </MainLayout>
+  );
+};
 
 export default UpdateDoctor
