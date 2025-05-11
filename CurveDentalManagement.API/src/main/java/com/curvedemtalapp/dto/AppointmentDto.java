@@ -1,5 +1,7 @@
 package com.curvedemtalapp.dto;
 
+import com.curvedemtalapp.entity.Doctor;
+import com.curvedemtalapp.entity.Patient;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +29,7 @@ public class AppointmentDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
     private Date appointmentDate;
 
-    private DoctorDto doctor;
+    private Doctor doctor;
 
-    private  PatientDto patient;
+    private Patient patient;
 }
