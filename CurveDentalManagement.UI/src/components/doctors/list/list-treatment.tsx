@@ -33,15 +33,15 @@ const TreatmentRecordsTable = ({ treatmentData }: { treatmentData: Treatment[] |
                 </TableHeader>
                  <TableBody>
                     {treatmentData && treatmentData.length > 0 ? (
-                    treatmentData.map((treatment: Treatment) => (
-                        <TableRow key={treatment.id}>
-                        <TableCell>{treatment.treatmentCode}</TableCell>
-                        <TableCell>{treatment.treatmentName}</TableCell>
-                        <TableCell>{treatment.duration}</TableCell>
-                        <TableCell>{treatment.cost}</TableCell>
-                        <TableCell>{treatment.indications}</TableCell>
-                        </TableRow>
-                    ))
+                      treatmentData.map((treatment: Treatment) => (
+                          <TableRow key={treatment.id}>
+                            <TableCell>{treatment.treatmentCode}</TableCell>
+                            <TableCell>{treatment.treatmentName}</TableCell>
+                            <TableCell>{treatment.duration}</TableCell>
+                            <TableCell>{treatment.cost}</TableCell>
+                            <TableCell>{treatment.indications}</TableCell>
+                          </TableRow>
+                      ))
                     ) : (
                     <TableRow>
                         <TableCell colSpan={5}>No Treatment Records Found</TableCell>
