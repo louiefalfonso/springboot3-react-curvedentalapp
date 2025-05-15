@@ -8,19 +8,6 @@ import { useGetDoctorById } from "@/services/doctor-services";
 import DoctorDetailsList from "./list/list-doctor";
 import TreatmentRecordsTable from "./list/list-treatment";
 
-type Treatment = {
-  id: number;
-  treatmentName: string;
-  treatmentCode: string;
-  description: string;
-  duration: string;
-  cost: string;
-  insuranceCoverage: string;
-  followUpCare: string;
-  riskBenefits: string; 
-  indications: string;
-}
-
 const DoctorDetails = () => {
   const { id } = useParams();
   const { data: doctorData, isLoading: isDoctorLoading, error: doctorError } = useGetDoctorById(id || "");

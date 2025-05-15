@@ -2,7 +2,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 
 const TreatmentDetailsList = ({treatmentData}:{treatmentData:any}) => {
   return (
-    <>
     <div className="rounded-md border p-5 w-full overflow-x-auto">
       <h2 className="font-heading scroll-m-20 border-b pb-4 text-xl font-semibold tracking-tight first:mt-0">Treatment Information</h2>
       <div className="min-w-full">
@@ -28,7 +27,6 @@ const TreatmentDetailsList = ({treatmentData}:{treatmentData:any}) => {
         </Table>        
       </div>
     </div>
-    </>
   )
 }
 
