@@ -6,11 +6,6 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-type Treatment = {
-  id: number;
-  treatmentName: string;
-};
-
 type Doctor = {
   firstName: string;
   lastName: string;
@@ -24,7 +19,7 @@ type Doctor = {
   dentalSchool: string;
   officeAddress: string;
   emergencyContact: string;
-  treatments: number[]; // Array of selected treatment IDs
+  treatments: number[]; 
 };
 
 interface AddDoctorFormProps {
@@ -68,8 +63,7 @@ const AddNewDoctorForm: React.FC<AddDoctorFormProps> = ({ onSubmit, treatments =
     { label: "Email Address", id: "email", type: "text", placeholder: "Email Address" },
     { label: "Phone Number", id: "contactNumber", type: "text", placeholder: "Phone Number" },
     { label: "Specialization", id: "specialization", type: "text", placeholder: "Specialization" },
-    { label: "Department", id: "department", type: "text", placeholder: "Department" },
-    
+    { label: "Department", id: "department", type: "text", placeholder: "Department" }, 
   ];
 
   return (
