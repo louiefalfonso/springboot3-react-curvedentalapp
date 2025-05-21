@@ -20,7 +20,7 @@ public class DoctorServiceImpl implements DoctorService {
     private TreatmentRepository treatmentRepository;
     private ModelMapper modelMapper;
 
-    // REST API - Create New Patient
+    // REST API - Create New Doctor
     @Override
     public DoctorDto createNewDoctor(DoctorDto doctorDto) {
         Doctor doctor = modelMapper.map(doctorDto, Doctor.class);
