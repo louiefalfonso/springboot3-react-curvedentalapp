@@ -1,12 +1,15 @@
 package com.curvedemtalapp.controller;
 
 import com.curvedemtalapp.dto.BillingDto;
+import com.curvedemtalapp.entity.Billing;
 import com.curvedemtalapp.repository.BillingRepository;
 import com.curvedemtalapp.service.BillingService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin("*")
 @RestController
@@ -22,5 +25,20 @@ public class BillingController {
     public ResponseEntity<BillingDto> createNewBilling(@RequestBody BillingDto billingDto){
         BillingDto savedBilling = billingService.createNewBilling(billingDto);
         return new ResponseEntity<>(savedBilling, HttpStatus.CREATED);
+    }
+
+    //GET - Get Billing By ID REST API
+    @GetMapping("{id}")
+    public ResponseEntity<Billing> getBillingById(@PathVariable ("id") Long id){
+        Billing billing = billingRepository.findAllById(id)
+                .orElseThrow(()->new RuntimeException("Billing does not exist with Id:" + id));
+        return ResponseEntity.ok(billing);
+    }
+
+    //GET - Get All Billing Lists REST API
+    @GetMapping
+    public  ResponseEntity<List<BillingDto>> getAllBillingLists(){
+        List<BillingDto> billings = billingService.getAllBillingLists();
+        return ResponseEntity.ok(billings);
     }
 }
