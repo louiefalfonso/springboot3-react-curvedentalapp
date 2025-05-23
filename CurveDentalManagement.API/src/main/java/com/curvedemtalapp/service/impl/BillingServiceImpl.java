@@ -59,8 +59,14 @@ public class BillingServiceImpl implements BillingService {
         Billing updateBillingObj = billingRepository.save(billing);
         return  modelMapper.map(updateBillingObj, BillingDto.class);
     }
+
+    // REST API - Delete Billing
+    @Override
+    public void deleteBilling(Long billingId) {
+        Billing billing = billingRepository.findAllById(billingId)
+                .orElseThrow(()->new RuntimeException("Billing doesn't exist with given id:" + billingId));
+        billingRepository.deleteById(billingId);
+    }
 }
-
-
 
 

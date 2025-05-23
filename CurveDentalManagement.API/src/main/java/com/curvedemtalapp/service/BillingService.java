@@ -13,4 +13,6 @@ public interface BillingService {
     List<BillingDto> getAllBillingLists();
 
     BillingDto updateBilling(Long billingId, BillingDto updateBilling);
+
+    void deleteBilling(Long billingId);
 }
