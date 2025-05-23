@@ -41,4 +41,24 @@ public class BillingController {
         List<BillingDto> billings = billingService.getAllBillingLists();
         return ResponseEntity.ok(billings);
     }
+
+    //UPDATE - Update Billing REST API
+    public ResponseEntity<Billing> updateBilling(long id, Billing billingDetails){
+        Billing updateBilling = billingRepository.findById(id)
+                .orElseThrow(()->new RuntimeException("Billing does not exist with id: " + id));
+
+        updateBilling.setTotalAmount(updateBilling.getTotalAmount());
+
+        billingRepository.save(updateBilling);
+        return ResponseEntity.ok(updateBilling);
+    }
+
+
+    //DELETE - Delete Billing REST API
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteBilling(@PathVariable ("id") Long billingId){
+        billingService.deleteBilling(billingId);
+        return ResponseEntity.ok("Billing Deleted Successfully");
+    }
 }
+

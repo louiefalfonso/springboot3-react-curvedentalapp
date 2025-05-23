@@ -38,7 +38,7 @@ public class Billing {
 
     @ManyToMany
     @JoinTable(
-            name = "patient_treatment",
+            name = "billing_treatment",
             joinColumns = @JoinColumn(name = "patient_id"),
             inverseJoinColumns = @JoinColumn(name = "treatment_id")
     )
