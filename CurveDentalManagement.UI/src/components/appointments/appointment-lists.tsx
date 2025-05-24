@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -66,9 +67,10 @@ const AppointmentLists = () => {
           <TableHeader>
             <TableRow>
                 <TableHead>Code</TableHead>
-                <TableHead>Time</TableHead>
+                <TableHead>Appointment Date</TableHead>
+                <TableHead>Scheduled Time</TableHead>
                 <TableHead>Status</TableHead>
-                <TableHead>Patient</TableHead>
+                <TableHead>Patient Name</TableHead>
                 <TableHead>Assigned Doctor</TableHead>
               </TableRow>
           </TableHeader>
@@ -76,6 +78,7 @@ const AppointmentLists = () => {
             {paginatedAppointments.map((appointment: Appointment) => (
               <TableRow key={appointment.id}>
                 <TableCell>{appointment.appointmentCode}</TableCell>
+                <TableCell>{format(new Date(appointment.appointmentDate), 'MM/dd/yyyy')}</TableCell>
                 <TableCell>{appointment.appointmentTime}</TableCell>
                 <TableCell>{appointment.status}</TableCell>
                 <TableCell>{`${appointment.patient?.firstName} ${appointment.patient?.lastName}`}</TableCell>

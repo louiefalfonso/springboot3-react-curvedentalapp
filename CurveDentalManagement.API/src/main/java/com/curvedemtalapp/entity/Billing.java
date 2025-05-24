@@ -36,10 +36,14 @@ public class Billing {
 
     private String remarks;
 
+    @ManyToOne
+    @JoinColumn(name = "patient_id", nullable = false)
+    private Patient patient;
+
     @ManyToMany
     @JoinTable(
             name = "billing_treatment",
-            joinColumns = @JoinColumn(name = "patient_id"),
+            joinColumns = @JoinColumn(name = "billing_id"),
             inverseJoinColumns = @JoinColumn(name = "treatment_id")
     )
     private List<Treatment> treatments;

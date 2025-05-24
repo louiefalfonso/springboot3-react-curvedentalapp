@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, ContactRound, UserPen, BriefcaseMedical, Microscope } from "lucide-react";
+import { Home, ContactRound, UserPen, BriefcaseMedical, Microscope, Wallet, CalendarClock } from "lucide-react";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
 import MainLogo from '@/assets/curve-dental-logo.jpeg';
 
@@ -32,6 +32,16 @@ const items = [
       title: "Treatments",
       url: "/treatments",
       icon: Microscope,
+    },
+    {
+      title: "Billings",
+      url: "/billings",
+      icon: Wallet,
+    },
+    {
+      title: "Appointments",
+      url: "/appointments",
+      icon: CalendarClock,
     },
     
   ];

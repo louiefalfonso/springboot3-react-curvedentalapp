@@ -47,12 +47,18 @@ public class BillingController {
         Billing updateBilling = billingRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("Billing does not exist with id: " + id));
 
-        updateBilling.setTotalAmount(updateBilling.getTotalAmount());
+        updateBilling.setTotalAmount(billingDetails.getTotalAmount());
+        updateBilling.setPaymentStatus(billingDetails.getPaymentStatus());
+        updateBilling.setPaymentMethod(billingDetails.getPaymentMethod());
+        updateBilling.setBillingDate(billingDetails.getBillingDate());
+        updateBilling.setPaymentDate(billingDetails.getPaymentDate());
+        updateBilling.setRemarks(billingDetails.getRemarks());
+        updateBilling.setPatient(billingDetails.getPatient());
+        updateBilling.setTreatments(billingDetails.getTreatments());
 
         billingRepository.save(updateBilling);
         return ResponseEntity.ok(updateBilling);
     }
-
 
     //DELETE - Delete Billing REST API
     @DeleteMapping("{id}")

@@ -1,5 +1,6 @@
 package com.curvedemtalapp.dto;
 
+import com.curvedemtalapp.entity.Patient;
 import com.curvedemtalapp.entity.Treatment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -31,6 +32,8 @@ public class BillingDto {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
     private Date paymentDate;
+
+    private Patient patient;
 
     private List<Treatment> treatments;
 }
