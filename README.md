@@ -18,7 +18,7 @@ The **Curve Dental Practice Management System** is a comprehensive application d
 - **Security**: Spring Security 6
 - **Frontend**: React with Vite
 - **Styling**: Tailwind CSS & shadcn/ui
-- **Database**: (Specify if applicable, e.g., MySQL, PostgreSQL)
+- **Database**: PostgreSQL
 
 ## Installation
 
