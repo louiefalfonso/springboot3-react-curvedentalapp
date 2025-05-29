@@ -12,36 +12,34 @@ type Doctor = { id: number; firstName: string; lastName: string;}
 type Patient = { id: number; firstName: string; lastName: string; }
 
 type AppointmentFormProps = {
-
+  appointmentData:{
     status: string;
-    setStatus: (value: string) => void;
     remarks: string;
-    setRemarks: (value: string) => void;
-    appointmentCode?: string;
-    setAppointmentCode: (value: string) => void;
-    appointmentTime?: string;
-    setAppointmentTime: (value: string) => void;
+    appointmentCode: string;
+    appointmentTime: string;
     appointmentDate: Date | undefined;
-    setAppointmentDate: (value: Date | undefined) => void;
-    doctorId: number | null;
-    setDoctorId: (value: number | null) => void;
-    doctors: Doctor[] | undefined;
-    patientId: number | null;
-    setPatientId: (value: number | null) => void;
-    patients: Patient[] | undefined;
-    handleSubmit: (e: React.FormEvent) => void;
-    handleDelete: () => void;
-    appointmentId: string;
+  }
+  setAppointmentData:(data: Partial<AppointmentFormProps["appointmentData"]>) => void;
+  doctorIds:  number[];
+  setDoctorIds: (value: number[]) => void;
+  doctors: { id: number; firstname: string; lastName:string }[] | undefined;
+  patientIds:number[];
+  setPatientIds: (value: number[]) => void;
+  patients: { id: number; firstname: string; lastName:string }[] | undefined;
+  handleSubmit: (e: React.FormEvent) => void;
+  handleDelete: () => void;
+  appointmentId: string;
 }
 
 const UpdateAppointmentForm:React.FC<AppointmentFormProps> = ({
-  status, setStatus,
-  remarks,setRemarks,
-  appointmentCode,setAppointmentCode,
-  appointmentTime, setAppointmentTime,
-  appointmentDate,setAppointmentDate,
-  doctorId,setDoctorId, doctors,
-  patientId, setPatientId, patients,
+  appointmentData,
+  setAppointmentData,
+  doctorIds = [],
+  setDoctorIds,
+  doctors  = [],
+  patientIds  = [],
+  setPatientIds,
+  patients  = [],
   handleSubmit,
   handleDelete,
   appointmentId
