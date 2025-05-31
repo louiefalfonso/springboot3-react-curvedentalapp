@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Toaster} from "@/components/ui/sonner"
 import { toast } from "sonner"
+import { format } from "date-fns";
 import Header from '../layout/header'
 import MainLayout from '../layout/layout'
 import UpdateAppointmentForm from "./form/update-form";
@@ -21,46 +22,52 @@ const UpdateAppointment = () => {
   const { data: patients } = useGetAllPatients();
   const { data: doctors } = useGetAllDoctors();
 
-  const [appointmentData , setAppointmentData] = useState({
-    status: "",
-    remarks: "",
-    appointmentCode: "",
-    appointmentTime: "",
-    appointmentDate:"",
-  });
-
-  const [doctorIds, setDoctorIds] = useState<number[]>([]);
-  const [patientIds, setPatientIds] = useState<number[]>([]);
+  const [ status, setStatus ] = useState<string>("");
+  const [ remarks, setRemarks ] = useState<string>("");
+  const [ appointmentCode, setAppointmentCode ] = useState<string>("");
+  const [ appointmentTime, setAppointmentTime ] = useState<string>("");
+  const [ appointmentDate, setAppointmentDate ] = useState<Date | undefined>(undefined);
+  const [ doctorId, setDoctorId] = useState<number | null>(null);
+  const [ patientId, setPatientId] = useState<number | null>(null);
 
   useEffect(() => {
     if (data) {
-      setAppointmentData({
-        status: data.status,
-        remarks: data.remarks,
-        appointmentCode: data.appointmentCode,
-        appointmentTime: data.appointmentTime,
-        appointmentDate: data.appointmentDate,
-      });
-      setDoctorIds(data.doctors.map((doctor: { id: number }) => doctor.id));
-      setPatientIds(data.patients.map((patient: { id: number }) => patient.id));
+      setStatus(data.status || "");
+      setRemarks(data.remarks || "");
+      setAppointmentCode(data.appointmentCode || "");
+      setAppointmentTime(data.appointmentTime || "");
+      setAppointmentDate(data.appointmentDate ? new Date(data.appointmentDate) : undefined);
+      setDoctorId(data.doctor.id);
+      setPatientId(data.patient.id);
     }
   }, [data]);
 
   if (isLoading) return <div>Loading...</div>;
   if (!data) return <div>No data found</div>;
 
-  const updateAppointmentData = (data: Partial<typeof appointmentData>) => {
-    setAppointmentData((prev) => ({ ...prev, ...data }));
-  };
 
+   // update appointment
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+      if (doctorId === null) {
+        toast.error("Please select a Doctor");
+        return;
+      }
+      if (patientId === null) {
+        toast.error("Please select a Patient");
+        return;
+      }
+
     const currentAppointment = {
        id: id || "",
-      ...appointmentData,
-      doctors: doctorIds.map((id) => ({ id })),
-      patients: patientIds.map((id) => ({ id })),
+       status,
+        remarks,
+        appointmentCode,
+        appointmentTime,
+        appointmentDate: appointmentDate ? format(appointmentDate, "MM-dd-yyyy") : undefined,
+        patient: { id: patientId },
+        doctor: { id: doctorId }
     };
 
     try {
@@ -80,6 +87,7 @@ const UpdateAppointment = () => {
     }
   }
 
+   // delete appointment
   const handleDelete = () => {
     try {
       deleteAppointment(id || "", {
@@ -103,13 +111,21 @@ const UpdateAppointment = () => {
       <Header Title="Update Appointment" />
         <div className="flex flex-1 flex-col gap-4 p-4">
           <UpdateAppointmentForm
-            appointmentData={appointmentData}
-            setAppointmentData={updateAppointmentData}
-            doctorIds={doctorIds}
-            setDoctorIds={setDoctorIds}
+            status={status}
+            setStatus={setStatus}
+            remarks={remarks}
+            setRemarks={setRemarks}
+            appointmentCode={appointmentCode}
+            setAppointmentCode={setAppointmentCode}
+            appointmentTime={appointmentTime}
+            setAppointmentTime={setAppointmentTime}
+            appointmentDate={appointmentDate}
+            setAppointmentDate={setAppointmentDate}
+            doctorId={doctorId}
+            setDoctorId={setDoctorId}
             doctors={doctors}
-            patientIds={patientIds}
-            setPatientIds={setPatientIds}
+            patientId={patientId}
+            setPatientId={setPatientId}
             patients={patients}
             handleSubmit={handleSubmit}
             handleDelete={handleDelete}

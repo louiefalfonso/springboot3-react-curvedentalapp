@@ -86,11 +86,10 @@ const UpdateDoctorForm: React.FC<DoctorFormProps> = React.memo(({
                 label: treatments?.find((treatment) => treatment.id === id)?.treatmentName,
             }))}
             onChange={(selectedOptions) => {
-                // Ensure selectedOptions is not null or undefined
                 if (selectedOptions) {
                 setTreatmentIds(selectedOptions.map((option) => option.value));
                 } else {
-                setTreatmentIds([]); // Clear the selection if no options are selected
+                setTreatmentIds([]); 
                 }
             }}
              classNamePrefix="custom-select"
@@ -152,15 +151,13 @@ const UpdateDoctorForm: React.FC<DoctorFormProps> = React.memo(({
           />
         </div>
       </div>
-      
-
       <div className="flex pl-4 mt-4">
         <Button type="submit" className="bg-orange-600 hover:bg-orange-700" aria-label="Update Doctor">
           Update Doctor
         </Button>
         <DeleteDoctorDialog doctorId={doctorId} onDelete={handleDelete} />
         <Link to={`/doctors`}>
-          <Button className="bg-gray-500 hover:bg-gray-600">Cancel</Button>
+          <Button className="bg-gray-600 hover:bg-gray-700">Cancel</Button>
         </Link>
       </div>
     </form>

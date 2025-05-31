@@ -26,7 +26,7 @@ const DeleteAppointmentDialog:React.FC<DeleteAppointmentDialogProps> = ({appoint
               Are you sure you want to fully delete this appointment's information? This action cannot be undone.
             </DialogDescription>
             <DialogFooter>
-              <Button onClick={onDelete} className="bg-red-500 hover:bg-red-600">
+              <Button onClick={onDelete} className="bg-rose-600 hover:bg-rose-700">
                 Confirm
               </Button>
             </DialogFooter>
