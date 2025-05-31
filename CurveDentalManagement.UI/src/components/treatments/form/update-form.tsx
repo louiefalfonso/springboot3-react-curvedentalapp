@@ -58,9 +58,7 @@ const UpdateTreatmentForm: React.FC<TreatmentFormProps> = React.memo(({
             <Input type="text" id={id} value={value} onChange={onChange} />
           </div>
         ))}
-
-        
-        
+ 
       </div>
       <div className="grid auto-rows-min md:grid-cols-3">
         <div className="grid w-full items-center gap-4 p-4">
