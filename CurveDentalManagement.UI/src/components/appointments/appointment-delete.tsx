@@ -18,7 +18,7 @@ const DeleteAppointmentDialog:React.FC<DeleteAppointmentDialogProps> = ({appoint
   return (
     <Dialog>
       <DialogTrigger asChild>
-      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete</Button>
+      <Button className="ml-2 mr-2 bg-rose-600 hover:bg-rose-700">Delete Appointment</Button>
       </DialogTrigger>
           <DialogContent>
             <DialogTitle>Confirm Deletion</DialogTitle>
