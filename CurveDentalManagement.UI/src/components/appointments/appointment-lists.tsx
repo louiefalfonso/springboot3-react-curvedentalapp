@@ -84,7 +84,7 @@ const AppointmentLists = () => {
                 <TableCell>{`${appointment.patient?.firstName} ${appointment.patient?.lastName}`}</TableCell>
                 <TableCell>Dr. {`${appointment.doctor?.firstName} ${appointment.doctor?.lastName}`}</TableCell>
                 <TableCell>
-                  <Link to={`/appointmenta/details/${appointment.id}`}>
+                  <Link to={`/appointments/details/${appointment.id}`}>
                     <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
                   </Link>
                   <Link to={`/appointments/update/${appointment.id}`}>

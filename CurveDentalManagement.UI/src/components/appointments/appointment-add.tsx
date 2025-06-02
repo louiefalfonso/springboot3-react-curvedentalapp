@@ -10,7 +10,6 @@ import AddNewAppointmentForm from "./form/add.form";
 
 const SUCCESS_MESSAGE = "Appointment Added Successfully";
 const ERROR_MESSAGE = "Failed to Add Appointment.";
-
 const AddNewAppointment = () => {
 
    // Declare state variables
