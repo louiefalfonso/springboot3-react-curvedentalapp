@@ -23,6 +23,7 @@ import AppointmentListsPage from './pages/appointments/page';
 import AddNewAppointment from './components/appointments/appointment-add';
 import UpdateAppointment from './components/appointments/appointment-update';
 import AppointmentDetails from './components/appointments/appointment-details';
+import BillingsListPage from './pages/billings/page';
 
 function App() {
   return (
@@ -52,7 +53,9 @@ function App() {
         <Route path="/appointments" element={<AppointmentListsPage/>} />
         <Route path="/appointments/add" element={<AddNewAppointment/>} />
         <Route path="/appointments/update/:id" element={<UpdateAppointment/>} />
-        <Route path="/appointments/details/:id" element={<AppointmentDetails/>} />    
+        <Route path="/appointments/details/:id" element={<AppointmentDetails/>} />
+
+        <Route path="/billings" element={<BillingsListPage/>} />    
           
       </Routes>
       <Toaster />
