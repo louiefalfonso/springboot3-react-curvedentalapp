@@ -4,10 +4,26 @@ import MainLayout from '../layout/layout'
 import { Button } from "@/components/ui/button";
 import { useGetAppointmentById } from "@/services/appointment-services";
 import AppointmentDetailsList from "./list/list-appointment";
+import { useMemo } from "react";
+import PatientListTable from "./list/list-patient";
+import DoctorListTable from "./list/list-doctor";
 const AppointmentDetails = () => {
 
   const { id } = useParams();
   const { data: appointmentData, isLoading: isAppointmentLoading, error: appointmentError } = useGetAppointmentById(id || "");
+
+  // Filter appointment for the specific patient
+  const patientAppointment = useMemo(() => {
+    if(!appointmentData || !appointmentData.patient) return[];
+    return appointmentData.patient;
+  }, [appointmentData]);
+
+  // Filter appointment for the specific doctor
+  const doctorAppointment = useMemo(() => {
+    if(!appointmentData || !appointmentData.doctor) return[];
+    return appointmentData.doctor;
+  }, [appointmentData])
+
 
   if (isAppointmentLoading) {
     return <div>Loading...</div>;
@@ -26,6 +42,8 @@ const AppointmentDetails = () => {
       <Header Title="Appointment Details" />
       <div className="flex flex-1 flex-col gap-4 p-4">
          <AppointmentDetailsList appointmentData={appointmentData}/>
+         <PatientListTable patientData={patientAppointment}/>
+         <DoctorListTable doctorData={doctorAppointment}/>
          <Link to={`/appointments`}>
           <Button className="bg-gray-600 hover:bg-gray-700">Back to Appointment List</Button>
         </Link>
