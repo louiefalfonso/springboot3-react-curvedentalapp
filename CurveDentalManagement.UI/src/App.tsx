@@ -24,6 +24,9 @@ import AddNewAppointment from './components/appointments/appointment-add';
 import UpdateAppointment from './components/appointments/appointment-update';
 import AppointmentDetails from './components/appointments/appointment-details';
 import BillingsListPage from './pages/billings/page';
+import AddNewBilling from './components/billings/billing-add';
+import UpdateBilling from './components/billings/billiing-update';
+import BillingDetails from './components/billings/billing-details';
 
 function App() {
   return (
@@ -55,7 +58,10 @@ function App() {
         <Route path="/appointments/update/:id" element={<UpdateAppointment/>} />
         <Route path="/appointments/details/:id" element={<AppointmentDetails/>} />
 
-        <Route path="/billings" element={<BillingsListPage/>} />    
+        <Route path="/billings" element={<BillingsListPage/>} />
+        <Route path="/billings/add" element={<AddNewBilling/>} />
+        <Route path="/billings/update/:id" element={<UpdateBilling/>} />   
+        <Route path="/billings/details/:id" element={<BillingDetails/>} />           
           
       </Routes>
       <Toaster />
