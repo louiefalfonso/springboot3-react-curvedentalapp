@@ -10,7 +10,7 @@ interface Billing {
     billingDate?: Date;
     paymentDate?: Date;
     patient?: number;
-    treatments?: number;
+    treatment?: number;
  
 }
 
