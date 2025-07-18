@@ -54,7 +54,7 @@ public class BillingController {
         updateBilling.setPaymentDate(billingDetails.getPaymentDate());
         updateBilling.setRemarks(billingDetails.getRemarks());
         updateBilling.setPatient(billingDetails.getPatient());
-        updateBilling.setTreatments(billingDetails.getTreatments());
+        updateBilling.setTreatment(billingDetails.getTreatment());
 
         billingRepository.save(updateBilling);
         return ResponseEntity.ok(updateBilling);
