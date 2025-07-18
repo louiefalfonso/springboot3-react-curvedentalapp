@@ -18,22 +18,21 @@ const AddNewAppointment = () => {
    const { data: doctors } = useGetAllDoctors();
    const { data: patients } = useGetAllPatients();
 
-     // Handle form submission for adding a new treatment
-  const handleFormSubmit = (newAppointment) => {
-    mutate(newAppointment, {
-      onSuccess: () => {
-        // Show success message and navigate to treatments list
-        toast.success(SUCCESS_MESSAGE);
-        navigate("/appointments");
-      },
-      onError: (error: unknown) => {
-        // Log error and show error message
-        console.error("Error Adding Treatment:", error);
-        toast.error(ERROR_MESSAGE);
-      },
-    });
-  };
-
+    // Handle form submission for adding a new treatment
+    const handleFormSubmit = (newAppointment) => {
+      mutate(newAppointment, {
+        onSuccess: () => {
+          // Show success message and navigate to treatments list
+          toast.success(SUCCESS_MESSAGE);
+          navigate("/appointments");
+        },
+        onError: (error: unknown) => {
+          // Log error and show error message
+          console.error("Error Adding Treatment:", error);
+          toast.error(ERROR_MESSAGE);
+        },
+      });
+    };
 
   return (
     <MainLayout>

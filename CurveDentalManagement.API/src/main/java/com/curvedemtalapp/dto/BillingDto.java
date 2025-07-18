@@ -35,5 +35,5 @@ public class BillingDto {
 
     private Patient patient;
 
-    private List<Treatment> treatments;
+    private Treatment treatment;
 }

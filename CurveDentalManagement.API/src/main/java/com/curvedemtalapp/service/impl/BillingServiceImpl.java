@@ -55,7 +55,7 @@ public class BillingServiceImpl implements BillingService {
         billing.setPaymentDate(updateBilling.getPaymentDate());
         billing.setRemarks(updateBilling.getRemarks());
         billing.setPatient(updateBilling.getPatient());
-        billing.setTreatments(updateBilling.getTreatments());
+        billing.setTreatment(updateBilling.getTreatment());
 
         Billing updateBillingObj = billingRepository.save(billing);
         return  modelMapper.map(updateBillingObj, BillingDto.class);
