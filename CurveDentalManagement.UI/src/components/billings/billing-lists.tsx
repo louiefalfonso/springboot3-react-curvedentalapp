@@ -52,7 +52,6 @@ const BillingsLists = () => {
       setCurrentPage(newPage);
   }
 
-
   return (
     <div className="rounded-md border p-5 w-full overflow-x-auto">
       <div className="flex flex-col md:flex-row justify-between items-center pb-5 space-y-2 md:space-y-0 md:space-x-2">
@@ -87,6 +86,14 @@ const BillingsLists = () => {
                 <TableCell>{new Date(billing.billingDate).toLocaleDateString()}</TableCell>
                 <TableCell>{new Date(billing.paymentDate).toLocaleDateString()}</TableCell>
                 <TableCell>{`${billing.patient?.firstName } ${billing.patient?.lastName }`} </TableCell>
+                <TableCell>
+                  <Link to={`/billings/details/${billing.id}`}>
+                    <Button className="mr-2 bg-sky-800 hover:bg-sky-950">View</Button>
+                  </Link>
+                  <Link to={`/billings/update/${billing.id}`}>
+                    <Button className="mr-2 bg-orange-600 hover:bg-orange-700">Update</Button>
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
            </TableBody>
