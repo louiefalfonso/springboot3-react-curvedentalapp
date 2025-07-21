@@ -10,8 +10,7 @@ interface Billing {
     billingDate?: Date;
     paymentDate?: Date;
     patient?: number;
-    treatment?: number;
- 
+    treatment?: number; 
 }
 
 const API_BASE_URL = import.meta.env.VITE_BASE_URI_BILLINGS
