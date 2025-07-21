@@ -43,7 +43,9 @@ public class BillingController {
     }
 
     //UPDATE - Update Billing REST API
-    public ResponseEntity<Billing> updateBilling(long id, Billing billingDetails){
+    @PutMapping("{id}")
+    public ResponseEntity<Billing> updateBilling(@PathVariable ("id")long id,
+                                                 @RequestBody Billing billingDetails){
         Billing updateBilling = billingRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("Billing does not exist with id: " + id));
 
