@@ -90,7 +90,7 @@ const LoginFormComponent = () => {
               </div>
               <Button
                 type="submit"
-                className="w-full bg-sky-500 hover:bg-sky-600"
+                className="w-full bg-orange-600 hover:bg-orange-700 text-white"
         
               >
                 Login
