@@ -33,6 +33,9 @@ import AddNewBilling from './components/billings/billing-add';
 import UpdateBilling from './components/billings/billiing-update';
 import BillingDetails from './components/billings/billing-details';
 
+import LoginPage from './pages/login/page';
+import RegisterPage from './pages/register/page';
+
 function App() {
   const routes = [
     { path: "/", element: <DashboardPage /> },
@@ -60,6 +63,8 @@ function App() {
     { path: "/billings/add", element: <AddNewBilling /> },
     { path: "/billings/update/:id", element: <UpdateBilling /> },
     { path: "/billings/details/:id", element: <BillingDetails /> },
+    { path: "/login", element: <LoginPage /> },
+    { path: "/register", element: <RegisterPage /> },
   ];
 
   return (
