@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 
 import DashboardPage from './pages/dashboard/page';
@@ -30,14 +30,17 @@ import AppointmentDetails from './components/appointments/appointment-details';
 
 import BillingsListPage from './pages/billings/page';
 import AddNewBilling from './components/billings/billing-add';
-import UpdateBilling from './components/billings/billiing-update';
+import UpdateBilling from './components/billings/billing-update';
 import BillingDetails from './components/billings/billing-details';
 
 import LoginPage from './pages/login/page';
 import RegisterPage from './pages/register/page';
+import ProtectedRoute from './services/protected-route';
 
 function App() {
-  const routes = [
+  const token = localStorage.getItem("token");
+
+  const protectedRoutes = [
     { path: "/", element: <DashboardPage /> },
     { path: "/staffs", element: <StaffListsPage /> },
     { path: "/staffs/add", element: <AddNewStaff /> },
@@ -63,16 +66,27 @@ function App() {
     { path: "/billings/add", element: <AddNewBilling /> },
     { path: "/billings/update/:id", element: <UpdateBilling /> },
     { path: "/billings/details/:id", element: <BillingDetails /> },
-    { path: "/login", element: <LoginPage /> },
-    { path: "/register", element: <RegisterPage /> },
   ];
 
   return (
     <>
       <Routes>
-        {routes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
+        <Route path="/" element={<Navigate to={"/login"} replace/>} /> 
+        <Route path="/dashboard" element={ <ProtectedRoute token={token}> <DashboardPage /> </ProtectedRoute> }/>
+
+        {protectedRoutes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={
+              <ProtectedRoute token={token}>
+                {route.element}
+              </ProtectedRoute>
+            }
+          />
         ))}
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
       <Toaster />
     </>
