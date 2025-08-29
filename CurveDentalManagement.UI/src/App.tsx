@@ -3,90 +3,41 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "@/components/ui/sonner";
 
 import DashboardPage from './pages/dashboard/page';
-import StaffListsPage from './pages/staffs/page';
-import AddNewStaff from './components/staffs/staff-add';
-import UpdateStaff from './components/staffs/staff-update';
-import StaffDetails from './components/staffs/staff-details';
-
-import PatientListsPage from './pages/patients/page';
-import AddNewPatient from './components/patients/patient-add';
-import UpdatePatient from './components/patients/patient-update';
-import PatientDetails from './components/patients/patient-details';
-
-import DoctorListsPage from './pages/doctors/page';
-import AddNewDoctor from './components/doctors/doctor-add';
-import UpdateDoctor from './components/doctors/doctor-update';
-import DoctorDetails from './components/doctors/doctor-details';
-
-import TreatmentListsPage from './pages/treatments/page';
-import AddNewTreatment from './components/treatments/treatment-add';
-import UpdateTreatment from './components/treatments/treatment-update';
-import TreatmentDetails from './components/treatments/treatment-details';
-
-import AppointmentListsPage from './pages/appointments/page';
-import AddNewAppointment from './components/appointments/appointment-add';
-import UpdateAppointment from './components/appointments/appointment-update';
-import AppointmentDetails from './components/appointments/appointment-details';
-
-import BillingsListPage from './pages/billings/page';
-import AddNewBilling from './components/billings/billing-add';
-import UpdateBilling from './components/billings/billing-update';
-import BillingDetails from './components/billings/billing-details';
 
 import LoginPage from './pages/login/page';
 import RegisterPage from './pages/register/page';
 import ProtectedRoute from './services/protected-route';
+import StaffListsPage from './pages/staffs/page';
+import DoctorListsPage from './pages/doctors/page';
+import PatientListsPage from './pages/patients/page';
+import TreatmentListsPage from './pages/treatments/page';
+import BillingsListPage from './pages/billings/page';
+import AppointmentListsPage from './pages/appointments/page';
+import AddNewDoctor from './components/doctors/doctor-add';
+import DoctorDetails from './components/doctors/doctor-details';
+import UpdateDoctor from './components/doctors/doctor-update';
 
 function App() {
   const token = localStorage.getItem("token");
-
-  const protectedRoutes = [
-    { path: "/", element: <DashboardPage /> },
-    { path: "/staffs", element: <StaffListsPage /> },
-    { path: "/staffs/add", element: <AddNewStaff /> },
-    { path: "/staffs/update/:id", element: <UpdateStaff /> },
-    { path: "/staffs/details/:id", element: <StaffDetails /> },
-    { path: "/patients", element: <PatientListsPage /> },
-    { path: "/patients/add", element: <AddNewPatient /> },
-    { path: "/patients/update/:id", element: <UpdatePatient /> },
-    { path: "/patients/details/:id", element: <PatientDetails /> },
-    { path: "/doctors", element: <DoctorListsPage /> },
-    { path: "/doctors/add", element: <AddNewDoctor /> },
-    { path: "/doctors/update/:id", element: <UpdateDoctor /> },
-    { path: "/doctors/details/:id", element: <DoctorDetails /> },
-    { path: "/treatments", element: <TreatmentListsPage /> },
-    { path: "/treatments/add", element: <AddNewTreatment /> },
-    { path: "/treatments/update/:id", element: <UpdateTreatment /> },
-    { path: "/treatments/details/:id", element: <TreatmentDetails /> },
-    { path: "/appointments", element: <AppointmentListsPage /> },
-    { path: "/appointments/add", element: <AddNewAppointment /> },
-    { path: "/appointments/update/:id", element: <UpdateAppointment /> },
-    { path: "/appointments/details/:id", element: <AppointmentDetails /> },
-    { path: "/billings", element: <BillingsListPage /> },
-    { path: "/billings/add", element: <AddNewBilling /> },
-    { path: "/billings/update/:id", element: <UpdateBilling /> },
-    { path: "/billings/details/:id", element: <BillingDetails /> },
-  ];
 
   return (
     <>
       <Routes>
         <Route path="/" element={<Navigate to={"/login"} replace/>} /> 
-        <Route path="/dashboard" element={ <ProtectedRoute token={token}> <DashboardPage /> </ProtectedRoute> }/>
-
-        {protectedRoutes.map((route) => (
-          <Route
-            key={route.path}
-            path={route.path}
-            element={
-              <ProtectedRoute token={token}>
-                {route.element}
-              </ProtectedRoute>
-            }
-          />
-        ))}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/dashboard" element={ <ProtectedRoute token={token}> <DashboardPage /> </ProtectedRoute> }/>
+       
+        <Route path='/doctors' element={ <ProtectedRoute token={token}><DoctorListsPage/></ProtectedRoute> }/>
+        <Route path='/doctors/add' element={ <ProtectedRoute token={token}><AddNewDoctor/></ProtectedRoute> }/>
+        <Route path='/doctors/details/:id' element={ <ProtectedRoute token={token}><DoctorDetails/></ProtectedRoute> }/>
+        <Route path='/doctors/update/:id' element={ <ProtectedRoute token={token}><UpdateDoctor/></ProtectedRoute> }/>
+
+        <Route path='/staffs' element={ <ProtectedRoute token={token}><StaffListsPage/></ProtectedRoute> }/>
+        <Route path='/patients' element={ <ProtectedRoute token={token}><PatientListsPage/></ProtectedRoute> }/>
+        <Route path='/treatments' element={ <ProtectedRoute token={token}><TreatmentListsPage/></ProtectedRoute> }/>
+        <Route path='/billings' element={ <ProtectedRoute token={token}><BillingsListPage/></ProtectedRoute> }/>
+        <Route path='/appointments' element={ <ProtectedRoute token={token}><AppointmentListsPage/></ProtectedRoute> }/>     
       </Routes>
       <Toaster />
     </>

@@ -22,11 +22,9 @@ const LoginFormComponent = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setLoading(true);
 
     if (!email || !password) {
       setError("Please enter both email and password.");
-      setLoading(false);
       return;
     }
 
