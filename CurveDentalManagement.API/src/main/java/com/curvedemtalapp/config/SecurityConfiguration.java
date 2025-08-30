@@ -42,6 +42,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.PUT,"/api/v1/**").permitAll()
                                 .requestMatchers(HttpMethod.DELETE,"/api/v1/**").permitAll()
                                 .requestMatchers(HttpMethod.OPTIONS,"/api/v1/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .anyRequest().authenticated()
 
