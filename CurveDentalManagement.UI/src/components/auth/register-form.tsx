@@ -8,12 +8,13 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import MainLogo from '@/assets/curve-dental-logo.jpeg';
 
-import AuthService from '@/services/auth-services';
-
 const RegisterFormComponent = () => {
+
+  const API_BASE_URL = import.meta.env.VITE_BASE_URI_AUTH;
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
+  const [fullName, setfullName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -21,9 +22,9 @@ const RegisterFormComponent = () => {
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    
-    if (!email || !password || !confirmPassword) {
-      setError("Please fill in all the fields.");
+
+    if (!email || !password || !fullName) {
+      setError("Please fill in all required fields.");
       return;
     }
 
@@ -33,11 +34,27 @@ const RegisterFormComponent = () => {
     }
 
     try {
-      await AuthService.register({ email, password });
-      toast.success("Registration Successful!");
-      navigate("/dashboard");
+      const response = await fetch(`${API_BASE_URL}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password, fullName }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Registration failed.");
+      }
+
+      toast.success("Registration Successful! Please log in.");
+      navigate("/login");
     } catch (err) {
-      setError(err.message || "Failed to register.");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Network error. Please try again later.");
+      }
     }
   };
 
@@ -54,6 +71,17 @@ const RegisterFormComponent = () => {
         <CardContent>
           <form onSubmit={handleRegister}>
             <div className="flex flex-col gap-6">
+              <div className="grid gap-2">
+                <Label htmlFor="fullName">Full Name</Label>
+                <Input
+                  type="text"
+                  className="form-input"
+                  required
+                  value={fullName}
+                  onChange={(e) => setfullName(e.target.value)}
+                  placeholder="Enter Full Name"
+                />
+              </div>
               <div className="grid gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -101,7 +129,7 @@ const RegisterFormComponent = () => {
             {error && <div className="mt-2 text-center text-red-500">{error}</div>}
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
+              <a href="/login" className="underline underline-offset-4">
                 Login
               </a>
             </div>
