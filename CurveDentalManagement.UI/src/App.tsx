@@ -16,6 +16,10 @@ import AppointmentListsPage from './pages/appointments/page';
 import AddNewDoctor from './components/doctors/doctor-add';
 import DoctorDetails from './components/doctors/doctor-details';
 import UpdateDoctor from './components/doctors/doctor-update';
+import AddNewPatient from './components/patients/patient-add';
+import PatientDetails from './components/patients/patient-details';
+import UpdatePatient from './components/patients/patient-update';
+import UserListPage from './pages/users/page';
 
 function App() {
   const token = localStorage.getItem("token");
@@ -33,11 +37,17 @@ function App() {
         <Route path='/doctors/details/:id' element={ <ProtectedRoute token={token}><DoctorDetails/></ProtectedRoute> }/>
         <Route path='/doctors/update/:id' element={ <ProtectedRoute token={token}><UpdateDoctor/></ProtectedRoute> }/>
 
-        <Route path='/staffs' element={ <ProtectedRoute token={token}><StaffListsPage/></ProtectedRoute> }/>
         <Route path='/patients' element={ <ProtectedRoute token={token}><PatientListsPage/></ProtectedRoute> }/>
+        <Route path='/patients/add' element={ <ProtectedRoute token={token}><AddNewPatient/></ProtectedRoute> }/>
+        <Route path='/patients/details/:id' element={ <ProtectedRoute token={token}><PatientDetails/></ProtectedRoute> }/>
+        <Route path='/patients/update/:id' element={ <ProtectedRoute token={token}><UpdatePatient/></ProtectedRoute> }/>
+
+        <Route path='/staffs' element={ <ProtectedRoute token={token}><StaffListsPage/></ProtectedRoute> }/>
         <Route path='/treatments' element={ <ProtectedRoute token={token}><TreatmentListsPage/></ProtectedRoute> }/>
         <Route path='/billings' element={ <ProtectedRoute token={token}><BillingsListPage/></ProtectedRoute> }/>
-        <Route path='/appointments' element={ <ProtectedRoute token={token}><AppointmentListsPage/></ProtectedRoute> }/>     
+        <Route path='/appointments' element={ <ProtectedRoute token={token}><AppointmentListsPage/></ProtectedRoute> }/>  
+
+        <Route path='/users' element={ <ProtectedRoute token={token}><UserListPage/></ProtectedRoute> }/> 
       </Routes>
       <Toaster />
     </>
