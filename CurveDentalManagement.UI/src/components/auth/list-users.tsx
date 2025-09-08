@@ -1,49 +1,44 @@
-
-import useGetAllUsers from '@/services/auth-services';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useGetAllUsers } from '@/services/auth-services';
 
 interface User {
   id: string;
-  username?: string;
-  email?: string;
-  fullName?: string;
+  username: string;
+  email: string;
+  fullName: string;
 }
 
-const ListAllUsers: React.FC = () => {
-  const { data, isLoading, refetch } = useGetAllUsers();
+const ListAllUsers = () => {
+  const { data, isLoading} = useGetAllUsers();
 
   // Handle loading state
   if (isLoading) { return <div>Loading...</div>;}
   if (!data) { return <div>No data found</div>;}
 
   return (
-    <div className="min-w-full">
-      <Card className="w-full">
-        <CardHeader>
-          <CardTitle>List of Users</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Full Name</th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
+    <div className="rounded-md border p-5 w-full overflow-x-auto">
+      <div className="min-w-full">
+        <Table>
+            <TableHeader>
+              <TableRow>
+                  <TableHead>Username</TableHead>
+                  <TableHead>Email</TableHead>
+                  <TableHead>Full Name</TableHead>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
               {data.map((user: User) => (
-                <tr key={user.username}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.username}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.email}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.fullName}</td>
-                </tr>
+                <TableRow key={user.id}>
+                  <TableCell>{user.username}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.fullName}</TableCell>
+                </TableRow>
               ))}
-            </tbody>
-          </table>
-        </CardContent>
-      </Card>
+            </TableBody>
+        </Table>    
+      </div>
     </div>
+    
   );
 };
 

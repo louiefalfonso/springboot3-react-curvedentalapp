@@ -20,9 +20,11 @@ const AuthService = {
     return axios.post(`${API_BASE_URL}/login`, user);
   },
 
-  getAllUsers(){
-    return axios.get(`${API_BASE_URL}/users`);
+  getAllUsers: async() => {
+    const response = await axios.get(`${API_BASE_URL}/users`);
+    return response.data;
   }
+
 };
 
 export const useGetAllUsers = () => {
