@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -205,6 +207,7 @@ public class StaffRepositoryUnitTests {
         Staff deletedStaff = staffRepository.findById(savedStaff.getId()).orElse(null);
         Assertions.assertThat(deletedStaff).isNull();
     }
+
 }
 
 
