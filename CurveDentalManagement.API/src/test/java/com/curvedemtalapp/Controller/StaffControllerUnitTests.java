@@ -103,9 +103,6 @@ public class StaffControllerUnitTests {
         assertEquals(200, response.getStatusCodeValue());
         assertNotNull(response.getBody());
         assertEquals(mockStaff, response.getBody());
-
-
-
     }
 
     @Test

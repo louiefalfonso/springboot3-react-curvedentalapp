@@ -1,0 +1,31 @@
+
+services:
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_USER: 
+      MYSQL_PASSWORD: 
+      MYSQL_DATABASE: 
+
+  spring-boot-app:
+      build:
+        context: .
+        dockerfile: dockerfiles/api.Dockerfile
+      ports:
+        - "8080:8080"
+      depends_on:
+        - mysql
+      environment:
+        SPRING_DATASOURCE_URL:
+        SPRING_DATASOURCE_USERNAME:
+        SPRING_DATASOURCE_PASSWORD: 
+
+  react-app:
+      build:
+        context: .
+        dockerfile: dockerfiles/ui.Dockerfile
+      ports:
+        - "3000:80"
