@@ -21,8 +21,8 @@ const ListAllUsers = () => {
         <Table>
             <TableHeader>
               <TableRow>
-                  <TableHead>Username</TableHead>
-                  <TableHead>Email</TableHead>
+                  <TableHead>User Name</TableHead>
+                  <TableHead>Email Address</TableHead>
                   <TableHead>Full Name</TableHead>
                 </TableRow>
             </TableHeader>
