@@ -13,7 +13,7 @@ const DoctorListTable = ({ doctorData }: { doctorData: any }) => {
                   <TableHead>Email</TableHead>
                   <TableHead>Phone Number</TableHead>
                   <TableHead>License Number</TableHead>
-                  <TableHead>Years Of Experience</TableHead>
+                  
                   <TableHead>Specialization</TableHead>
                   <TableHead>Department</TableHead>
                 </TableRow>
@@ -24,7 +24,7 @@ const DoctorListTable = ({ doctorData }: { doctorData: any }) => {
                 <TableCell>{doctorData.email}</TableCell>
                 <TableCell>{doctorData.contactNumber}</TableCell>
                 <TableCell>{doctorData.licenseNumber}</TableCell>
-                <TableCell>{doctorData.yearsOfExperience}</TableCell>
+                
                 <TableCell>{doctorData.specialization}</TableCell>  
                 <TableCell>{doctorData.department}</TableCell>    
               </TableRow>    
@@ -39,7 +39,6 @@ const DoctorListTable = ({ doctorData }: { doctorData: any }) => {
           <TableHeader>
             <TableRow>
                 <TableHead>Schedule</TableHead>
-                <TableHead>Dental School</TableHead>
                 <TableHead>Office Address</TableHead>
                 <TableHead>Emergency Contact</TableHead>
               </TableRow>
@@ -47,7 +46,6 @@ const DoctorListTable = ({ doctorData }: { doctorData: any }) => {
           <TableBody>
             <TableRow key={doctorData.id}>
               <TableCell>{doctorData.schedule}</TableCell>
-              <TableCell>{doctorData. dentalSchool}</TableCell>  
               <TableCell>{doctorData.officeAddress}</TableCell>   
               <TableCell>{doctorData.emergencyContact}</TableCell>     
             </TableRow>    
