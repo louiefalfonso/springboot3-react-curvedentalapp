@@ -1,14 +1,23 @@
 import { useParams, Link } from "react-router-dom";
+import { useMemo } from "react";
 import Header from '../layout/header'
 import MainLayout from '../layout/layout'
 import { Button } from "@/components/ui/button";
 import { useGetPatientById } from "@/services/patient-services";
 import PatientDetailsList from "./list/list-patient";
+import TreatmentRecordsTable from "./list/list-treatment";
 
 const PatientDetails = () => {
 
     const { id } = useParams();
     const { data: patientData, isLoading:  isPatientLoading, error: patientError} = useGetPatientById(id || "");
+
+    // Filter treatments for the specific patient
+    const patientTreatment = useMemo(() => { 
+        if (!patientData || !patientData.treatments) return [];
+        return patientData.treatments;  
+    }, [patientData]);
+ 
 
     if (isPatientLoading) {
         return <div>Loading...</div>;
@@ -28,6 +37,7 @@ const PatientDetails = () => {
         <Header Title="Patient Details" />
         <div className="flex flex-1 flex-col gap-4 p-4">
             <PatientDetailsList patientData ={patientData}/>
+            <TreatmentRecordsTable treatmentData={patientTreatment} />
             <div className="flex">
                 <Link to={`/patients`}>
                     <Button className="bg-gray-500 hover:bg-gray-600">Back to Patients List</Button>

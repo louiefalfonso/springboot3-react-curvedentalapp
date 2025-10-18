@@ -12,8 +12,7 @@ const DoctorListTable = ({ doctorData }: { doctorData: any }) => {
                   <TableHead>Full Name</TableHead>
                   <TableHead>Email</TableHead>
                   <TableHead>Phone Number</TableHead>
-                  <TableHead>License Number</TableHead>
-                  
+                  <TableHead>License Number</TableHead> 
                   <TableHead>Specialization</TableHead>
                   <TableHead>Department</TableHead>
                 </TableRow>
