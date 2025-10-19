@@ -3,28 +3,29 @@ import { useMemo } from "react";
 import Header from '../layout/header'
 import MainLayout from '../layout/layout'
 import { Button } from "@/components/ui/button";
+import { useGetAllAppointments } from "@/services/appointment-services";
 import { useGetPatientById } from "@/services/patient-services";
 import PatientDetailsList from "./list/list-patient";
-import TreatmentRecordsTable from "./list/list-treatment";
+import PatientAppointment from "./list/list-appointment";
 
 const PatientDetails = () => {
 
     const { id } = useParams();
     const { data: patientData, isLoading:  isPatientLoading, error: patientError} = useGetPatientById(id || "");
+    const { data: appointmentsData, isLoading: isAppointmentLoading, error: appointmentError } = useGetAllAppointments();
 
-    // Filter treatments for the specific patient
-    const patientTreatment = useMemo(() => { 
-        if (!patientData || !patientData.treatments) return [];
-        return patientData.treatments;  
-    }, [patientData]);
- 
+    // Filter appointment for the specific patient
+  const patientAppointment = useMemo(() => {
+    if (!appointmentsData) return [];
+    return appointmentsData.filter((appt: any) => String(appt.patient?.id) === String(id));
+  }, [appointmentsData, id]);
 
-    if (isPatientLoading) {
+    if (isPatientLoading || isAppointmentLoading) {
         return <div>Loading...</div>;
     }
     
-    if (patientError) {
-        console.error('Error details:', { patientError });
+    if (patientError && appointmentError) {
+        console.error('Error details:', { patientError , appointmentError });
         return <div>Error loading data. Please check the console for more details.</div>;
     }
     
@@ -37,7 +38,7 @@ const PatientDetails = () => {
         <Header Title="Patient Details" />
         <div className="flex flex-1 flex-col gap-4 p-4">
             <PatientDetailsList patientData ={patientData}/>
-            <TreatmentRecordsTable treatmentData={patientTreatment} />
+            <PatientAppointment appointmentData={patientAppointment}/>
             <div className="flex">
                 <Link to={`/patients`}>
                     <Button className="bg-gray-500 hover:bg-gray-600">Back to Patients List</Button>
