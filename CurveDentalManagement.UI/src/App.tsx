@@ -66,7 +66,7 @@ function App() {
         <Route path='/treatments/update/:id' element={ <ProtectedRoute token={token}><UpdateTreatment/></ProtectedRoute> }/>
       
         <Route path='/billings' element={ <ProtectedRoute token={token}><BillingsListPage/></ProtectedRoute> }/>
-        <Route path='/billings/aa' element={ <ProtectedRoute token={token}><AddNewBilling/></ProtectedRoute> }/>
+        <Route path='/billings/add' element={ <ProtectedRoute token={token}><AddNewBilling/></ProtectedRoute> }/>
         <Route path='/billings/details/:id' element={ <ProtectedRoute token={token}><BillingDetails/></ProtectedRoute> }/>
         <Route path='/billings/update/:id' element={ <ProtectedRoute token={token}><UpdateBilling/></ProtectedRoute> }/>
 
